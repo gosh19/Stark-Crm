@@ -26,5 +26,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['admin']], function () {
     Route::get('/admin', 'AdminController@index')->name('Admin.index');
     Route::post('/user/store', 'UserController@store')->name('User.store');
+    Route::get('/Datos/Admin', 'DatoController@index')->name('Dato.index');
     /**Excel routes */
 });

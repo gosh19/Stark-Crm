@@ -9,7 +9,14 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class DatoController extends Controller
 {
-    
+    public function index()
+    {
+        $datos = \App\Dato::where('user_id', null)->orderBy('id','desc')->get();
+
+        return view('datos.admin.index',[
+                                        'datos' => $datos,
+                                        ]);
+    }
     /**
     * @return \Illuminate\Support\Collection
     */

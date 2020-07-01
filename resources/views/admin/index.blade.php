@@ -31,6 +31,16 @@
 
                     </div>
                 </div>
+                <div class="card">
+                    <div class="card-header">
+                        Operarios
+                    </div>
+                    <ul class="list-group">
+                        @foreach ($operarios as $operario)
+                            <li class="list-group-item">{{$operario->name}}</li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
             <div class="col-md-8">
 
@@ -41,6 +51,7 @@
                     <ul class="list-group">
                         <li class="list-group-item"><a data-toggle="collapse" href="#form-carga-csv">Subir CSV</a></li>
                         <li class="list-group-item"><a data-toggle="collapse" href="#form-create-user">Crear usuario</a></li>
+                        <li class="list-group-item"><a href="{{route('Dato.index')}}">Ir a datos</a></li>
                     </ul>
                     <div class="collapse m-2" id="form-carga-csv">
                         @include('excel.import')
