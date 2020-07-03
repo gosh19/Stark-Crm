@@ -29,3 +29,10 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/Datos/Admin', 'DatoController@index')->name('Dato.index');
     /**Excel routes */
 });
+
+
+Route::group(['middleware' => ['operario']], function () {
+    Route::resource('Comentario', 'ComentarioController');
+    Route::get('/operario', 'OperarioController@index')->name('Operario.index');
+    /**Excel routes */
+});

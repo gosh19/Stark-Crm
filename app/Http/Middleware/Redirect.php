@@ -23,7 +23,9 @@ class Redirect
                 case 'admin':
                     $redirect = RouteServiceProvider::ADMIN;
                     break;
-                
+                case 'operario':
+                    $redirect = RouteServiceProvider::OPERARIO;
+                    break;
                 default:
                     # code...
                     break;

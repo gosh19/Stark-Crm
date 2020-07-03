@@ -1,6 +1,17 @@
 <div>
-    <h1>{{var_dump($debug)}}</h1>
-    <h1>{{var_dump($selec)}}</h1>
+    <h4>Hay {{count($selec)}} datos seleccionados</h4>
+    <div class="d-flex justify-content-around mb-3">
+        <div wire:loading.remove >
+
+            @foreach ($operarios as $op)
+            <button class="btn btn-primary" wire:click="pasarDatos({{$op->id}})">{{$op->name}}</button>
+            @endforeach
+        </div>
+        <div wire:loading>
+            Cargando......
+        </div>
+    </div>
+
     <table class="table table-hover">
         <thead>
             <tr>
@@ -19,6 +30,7 @@
                     style="cursor:pointer" 
                     onclick="checkData({{$dato->id}})"
                     wire:click="submit({{$dato}})"
+                    class="{{(isset($selec[$dato->id])) ? 'bg-success':''}}"
                     >
                     <td scope="row">{{$dato->id}}</td>
                     <td>{{$dato->pedido}}</td>
@@ -27,13 +39,11 @@
                     <td>{{$dato->telefono}}</td>
                     <td>{{$dato->hora_contacto}}</td>
                     <td>
-                        <form >
                         <div class="form-check">
                             <label class="form-check-label">
                                 <input type="checkbox" class="form-check-input" name="dato[{{$key}}]" id="dato-{{$dato->id}}" value="{{$dato->id}}" onclick="checkData({{$dato->id}})" >
                             </label>
                         </div>
-                        </form>
                     </td>
                 </tr>
             @endforeach
@@ -44,10 +54,5 @@
 <script>
     const checkData = (id) => {
         document.getElementById('dato-'+id).checked = !document.getElementById('dato-'+id).checked;
-        if ( $('#row-dato-'+id).hasClass('bg-success') ){
-            $('#row-dato-'+id).removeClass('bg-success');
-        }else{
-            $('#row-dato-'+id).addClass('bg-success');
-        }
     }
 </script>
