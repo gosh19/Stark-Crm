@@ -34,5 +34,7 @@ Route::group(['middleware' => ['admin']], function () {
 Route::group(['middleware' => ['operario']], function () {
     Route::resource('Comentario', 'ComentarioController');
     Route::get('/operario', 'OperarioController@index')->name('Operario.index');
+
+    Route::get('/operario-putCase/{Dato}/{case}', 'OperarioController@putCase')->name('Operario.putCase');
     /**Excel routes */
 });

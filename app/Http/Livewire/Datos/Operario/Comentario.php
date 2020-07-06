@@ -32,6 +32,11 @@ class Comentario extends Component
         $this->comentario = "";
     }
 
+    public function wea()
+    {
+        # code...
+    }
+
     public function render()
     {
         return view('livewire.datos.operario.comentario');

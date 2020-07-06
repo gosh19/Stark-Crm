@@ -8,10 +8,10 @@
             
             <div class="card">
                 <div class="card-header">
-                    {{$user->name}}
+                    {{$operario->name}}
                 </div>
                 <div class="card-body">
-                    {{$user->email}}
+                    {{$operario->email}}
                 </div>
             </div>
         </div>
@@ -20,7 +20,7 @@
     <div class="row">
         <div class="col-md-12">
 
-            @livewire('datos.operario.datos-list',[])
+            @livewire('datos.operario.datos-list',['operario'=>$operario])
         </div>
     </div>
 </div>

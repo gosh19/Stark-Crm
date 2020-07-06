@@ -32,20 +32,14 @@ class DatosList extends Component
         }
 
         if ($control) {
-            $this->debug = 'encontra3';
             unset($aux[$dato['id']]);
         }else{
-            $this->debug = 'agrega3';
             $aux[$dato['id']] = $dato;
         }
         $this->selec = $aux;
 
     }
 
-    public function updated($field)
-    {
-
-    }
 
     public function pasarDatos($id)
     {

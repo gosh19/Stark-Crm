@@ -8,13 +8,22 @@ use Illuminate\Support\Facades\Auth;
 class DatosList extends Component
 {
     public $datos;
+    public $operario;
+    public $debug = '1';
 
-    public function mount()
+    public function mount(\App\Operario $operario)
     {
-        $this->datos = \App\Dato::where('user_id', Auth::user()->id)->get();
+        $this->operario = $operario;
+
+        $this->datos = $operario->datosNuevos();
     }
 
-    
+    public function putCase($key, $case)
+    {
+        $this->datos[$key]->case = $case;
+        $this->datos[$key]->save();
+        unset($this->datos[$key]);
+    }
 
     public function render()
     {

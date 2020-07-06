@@ -9,7 +9,16 @@ class OperarioController extends Controller
 {
     public function index()
     {
+        $operario = \App\Operario::find(Auth::user()->id);
 
-        return view('operario.index',['user' => Auth::user()]);
+        return view('operario.index',['operario' => $operario]);
+    }
+
+    public function putCase(\App\Dato $Dato,$case)
+    {
+        $Dato->case = $case;
+        $Dato->save();
+
+        return redirect()->back();
     }
 }
