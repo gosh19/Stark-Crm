@@ -1,5 +1,4 @@
 <div class="row">
-   
     <table class="table table-hover">
         <thead>
             <tr>
@@ -27,11 +26,20 @@
                     <td>{{$dato->telefono}}</td>
                     <td class="pr-1">{{$dato->hora_contacto}}</td>
 
-                    <td style="max-width: 300px">
+                    <td style="width: 400px">
                         <div class="">
                             <button wire:click="putCase({{$key}},'na')" class="btn btn-danger">NA</button>
-                            <button class="btn btn-success">Agendar</button>
+                            <button data-toggle="collapse" href="#agenda-collapse-{{$dato->id}}" wire:click="showHideCollapse({{$key}})" class="btn btn-success">Agendar</button>
                             <button wire:click="putCase({{$key}},'ni')" class="btn btn-primary">No interesado</button>
+                        </div>
+                        <div class="collapse {{$stateCollapse[$key] ?? null}} " id="agenda-collapse-{{$dato->id}}">
+                            <div class="card">
+                                <div class="card-body">
+                                    <input class="mb-3" type="datetime-local" wire:model="fecha" >
+                                    <input class="mb-3" type="text" wire:model.lazy="anotacion" placeholder="Detalle..." >
+                                    <button wire:click="agendarDato({{$key}})" class="btn btn-success">Agendar</button>
+                                </div>
+                            </div>
                         </div>
                         @livewire('datos.operario.comentario',['dato'=> $dato], key($dato->id))
                     </td>
@@ -41,10 +49,3 @@
     </table>
 </div>
 
-<script>
-    window.livewire.on('postAddedd', function() {
-        console.log('weaaa');
-        
-        alert('A post was added with the id of: ');
-    })
-</script>

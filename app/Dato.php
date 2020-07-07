@@ -18,4 +18,9 @@ class Dato extends Model
     {
         return $this->hasMany('App\Comentario')->orderBy('id','desc')->take(5);
     }
+
+    public function agenda()
+    {
+        return $this->hasOne('App\Agenda');
+    }
 }

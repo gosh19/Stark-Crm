@@ -30,6 +30,8 @@ class Comentario extends Component
         $this->comments[] = $comentario;
 
         $this->comentario = "";
+
+        $this->emitUp('refreshRow');
     }
 
     public function wea()

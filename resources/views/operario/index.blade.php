@@ -15,6 +15,10 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-md-9">
+            @livewire('datos.operario.agenda',['operario'=>$operario])
+        </div>
         
     </div>
     <div class="row">
