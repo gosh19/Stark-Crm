@@ -27,17 +27,42 @@ class Operario extends Model
         return $datos;
     }
 
-    public function agendados()
+    public function agendados($case = false)
     {
-        $datos = \App\Dato::where([['user_id',$this->id],['case',null]])->get();
+        if ($case) {
 
-        foreach ($datos as $key => $dato) {
-            if ($dato->agenda == null) {
-                unset($datos[$key]);
-            }else{
-                $dato->agenda->fecha = new \Carbon\Carbon($dato->agenda->fecha);
+            $hoy = \Carbon\Carbon::now();
+
+            $datos = \App\Dato::where([['user_id',$this->id],['case',null]])->get();
+            $agendasProximas = \App\Agenda::where('fecha', '>=',$hoy)->get();
+
+            $data = [];
+            foreach ($datos as $key => $dato) {
+                foreach ($agendasProximas as $key => $ax) {
+                    if ($dato->id == $ax->dato_id) {
+                        $dato->agenda->fecha = new \Carbon\Carbon($dato->agenda->fecha);
+                        $data[] = $dato;
+                        break;
+                    }
+                }
+            }
+            return $data;
+
+        }else{
+
+            $datos = \App\Dato::where([['user_id',$this->id],['case',null]])->get();
+
+            foreach ($datos as $key => $dato) {
+                if ($dato->agenda == null) {
+                    unset($datos[$key]);
+                }else{
+                    $dato->agenda->fecha = new \Carbon\Carbon($dato->agenda->fecha);
+                }
             }
         }
+
+        
+
 
         return $datos;
     }

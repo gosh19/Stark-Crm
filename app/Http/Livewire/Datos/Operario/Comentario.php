@@ -34,10 +34,6 @@ class Comentario extends Component
         $this->emitUp('refreshRow');
     }
 
-    public function wea()
-    {
-        # code...
-    }
 
     public function render()
     {

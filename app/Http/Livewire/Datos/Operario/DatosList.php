@@ -46,11 +46,9 @@ class DatosList extends Component
         \App\Agenda::updateOrCreate(['dato_id'=> $this->datos[$key]->id], ['fecha' => $this->fecha, 'anotacion' => $this->anotacion]);
         unset($this->stateCollapse[$key]);
         unset($this->datos[$key]);
-    }
 
-    public function updated()
-    {
-        $this->debug = 'weno';
+        $this->fecha = '';
+        $this->anotacion = '';
     }
 
     public function showHideCollapse($key)

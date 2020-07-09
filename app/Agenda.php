@@ -10,4 +10,9 @@ class Agenda extends Model
     protected $fillable = [
         'dato_id','fecha', 'anotacion',
     ];
+
+    public function dato()
+    {
+        return $this->belongsTo('App\Dato');
+    }
 }
