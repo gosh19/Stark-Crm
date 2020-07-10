@@ -26,7 +26,10 @@ class Operario extends Model
 
         return $datos;
     }
-
+    /**
+     * Entrega los datos agendados por el operario
+     * en caso de pasa el case como true entrega solo los q aun se pueden llamar
+     */
     public function agendados($case = false)
     {
         if ($case) {

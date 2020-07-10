@@ -36,5 +36,6 @@ Route::group(['middleware' => ['operario']], function () {
     Route::get('/operario', 'OperarioController@index')->name('Operario.index');
 
     Route::get('/operario-putCase/{Dato}/{case}', 'OperarioController@putCase')->name('Operario.putCase');
+    Route::post('/operario-re-agendar', 'OperarioController@reAgendar')->name('Operario.reAgendar');
     /**Excel routes */
 });

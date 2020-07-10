@@ -32,7 +32,7 @@ class DatoController extends Controller
     {
         session('datosNuevos', 0);
         session('datosRepetidos', 0);
-        Excel::import(new ImportDatos, request()->file('file'));
+        Excel::import(new ImportDatos, request()->file('arch'));
 
         return redirect()->back();
     }

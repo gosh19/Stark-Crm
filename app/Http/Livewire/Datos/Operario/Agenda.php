@@ -12,10 +12,20 @@ class Agenda extends Component
 
     public $debug = [];
 
+    public $fecha = [];
+    public $anotacion;
+
     public function mount(\App\Operario $operario)
     {
         $this->operario = $operario;
-        $this->agendados = $this->sortData($this->operario->agendados(true));
+        $this->agendados = $this->operario->agendados(true);
+        $this->anotacion = [];
+
+        foreach ($this->agendados as $key => $ag) {
+            $this->fecha[] = date_format($ag->agenda->fecha, 'Y/m/d H:i:s');
+            $this->anotacion[] = $ag->agenda->anotacion;
+        }
+
     }
 
     private function sortData($array)
@@ -39,7 +49,7 @@ class Agenda extends Component
 
     public function refresh()
     {
-        $this->agendados = $this->sortData($this->operario->agendados(true));
+        $this->agendados = $this->operario->agendados(true);
 
     }
     public function render()

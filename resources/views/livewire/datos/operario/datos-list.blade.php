@@ -1,4 +1,6 @@
 <div class="row">
+    <button wire:click="refresh" class="rounded-circle btn btn-primary"><img src="/open-iconic/svg/loop-circular.svg" alt="icon name" style="width: 25px"></button>
+
     <table class="table table-hover">
         <thead>
             <tr>
@@ -27,12 +29,17 @@
                     <td class="pr-1">{{$dato->hora_contacto}}</td>
 
                     <td style="width: 400px">
-                        <div class="">
+                        <div class="row justify-content-around mb-3">
                             <button wire:click="putCase({{$key}},'na')" class="btn btn-danger">NA</button>
-                            <button data-toggle="collapse" href="#agenda-collapse-{{$dato->id}}" wire:click="showHideCollapse({{$key}})" class="btn btn-success">Agendar</button>
-                            <button wire:click="putCase({{$key}},'ni')" class="btn btn-primary">No interesado</button>
+                            <button wire:click="showHideCollapse({{$key}})" data-toggle="collapse" href="#agenda-collapse-{{$dato->id}}" class="btn btn-success">Agendar</button>
+                            <button wire:click="putCase({{$key}},'posible')" class="btn btn-warning">Posible</button>
+                            
                         </div>
-                        <div class="collapse {{$stateCollapse[$key] ?? null}} " id="agenda-collapse-{{$dato->id}}">
+                        <div class="row justify-content-around">
+                            <button wire:click="putCase({{$key}},'ni')" class="btn btn-primary">No interesado</button>
+                            <button wire:click="putCase({{$key}},'vendido')" class="btn btn-success">Vendido</button>
+                        </div>
+                        <div class="collapse mt-3 {{$stateCollapse[$key] ?? null}} " id="agenda-collapse-{{$dato->id}}">
                             <div class="card">
                                 <div class="card-body">
                                     <input class="mb-3" type="datetime-local" wire:model="fecha" >

@@ -21,4 +21,16 @@ class OperarioController extends Controller
 
         return redirect()->back();
     }
+
+    public function reAgendar(Request $request)
+    {
+        $agenda = \App\Agenda::find($request->id);
+
+        $agenda->fecha = $request->fecha;
+        $agenda->anotacion = $request->anotacion;
+
+        $agenda->save();
+
+        return redirect()->back();
+    }
 }
