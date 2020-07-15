@@ -14,6 +14,11 @@ class Dato extends Model
         'hora_contacto',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
     public function comentarios()
     {
         return $this->hasMany('App\Comentario')->orderBy('id','desc')->take(5);
