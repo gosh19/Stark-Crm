@@ -1,15 +1,10 @@
 <div>
     <h4>Hay {{count($selec)}} datos seleccionados</h4>
     <div class="d-flex justify-content-around mb-3">
-        <div wire:loading.remove >
 
             @foreach ($operarios as $op)
             <button class="btn btn-primary" wire:click="pasarDatos({{$op->id}})">{{$op->name}}</button>
             @endforeach
-        </div>
-        <div wire:loading>
-            Cargando......
-        </div>
     </div>
 
     <table class="table table-hover">

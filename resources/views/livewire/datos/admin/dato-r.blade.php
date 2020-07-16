@@ -1,9 +1,10 @@
-<div>
-    <div class="card w-100">
+<div class="row">
+
+    <div class="card w-100 ">
         <div class="card-header">
             Dato repetido N°{{$key+1}}
         </div>
-        <div class="card-body">
+        <div class="card-body {{$theme}}">
             <div class="row">
                 <div class="col-3">
                     <h4>Dato existente</h4>
@@ -39,11 +40,11 @@
                 <div class="col-1 mh-100">
                         <div class="row">
 
-                            <button wire:click="actualizar({{$key}})" class="btn btn-primary btn-block mb-3">Re-cargar</button>
-                            <button class="btn btn-danger btn-block mb-3">No cargar</button>
+                            <button wire:click="actualizar" class="btn btn-primary btn-block mb-3">Re-cargar</button>
+                            <button wire:click="noCargar" class="btn btn-danger btn-block mb-3">No cargar</button>
                             @if ($repetido['dato']['user_id'] != null)
                                 
-                            <button class="btn btn-success btn-block ">Avisar a {{$repetido['dato']->user->name ?? null}} </button>
+                            <button wire:click="aviso" class="btn btn-success btn-block ">Avisar a {{$repetido['dato']['user']['name'] ?? null}} </button>
                             @endif
                         </div>
                 </div>

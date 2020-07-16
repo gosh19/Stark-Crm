@@ -14,6 +14,7 @@ class DatosList extends Component
     public $debug = '1';
     public $fecha;
     public $stateCollapse;
+    public $case;
 
     protected $listeners = ['refreshRow'];
 
@@ -33,9 +34,14 @@ class DatosList extends Component
         $this->stateCollapse = [];
     }
 
-    public function putCase($key, $case)
+    public function selectCase($case)
     {
-        $this->datos[$key]->case = $case;
+        $this->case = $case;
+    }
+
+    public function putCase($key)
+    {
+        $this->datos[$key]->case = $this->case;
         $this->datos[$key]->save();
         unset($this->datos[$key]);
         $this->emitSelf('postAdded',['postId'=> 1]);
@@ -46,6 +52,8 @@ class DatosList extends Component
         \App\Agenda::updateOrCreate(['dato_id'=> $this->datos[$key]->id], ['fecha' => $this->fecha, 'anotacion' => $this->anotacion]);
         unset($this->stateCollapse[$key]);
         unset($this->datos[$key]);
+        $this->anotacion = '';
+        $this->fecha = '';
     }
 
     public function updated()
@@ -64,7 +72,7 @@ class DatosList extends Component
 
     public function refresh()
     {
-        $this->datos = $operario->datosNuevos();
+        $this->datos = $this->operario->datosNuevos();
 
     }
 

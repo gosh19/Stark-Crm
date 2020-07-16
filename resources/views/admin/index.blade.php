@@ -37,7 +37,14 @@
                     </div>
                     <ul class="list-group">
                         @foreach ($operarios as $operario)
-                            <li class="list-group-item">{{$operario->name}}</li>
+                            <li class="list-group-item">
+                                <div class="d-flex justify-content-between">
+
+                                    <p>{{$operario->name}}</p>
+                                    - 
+                                    <p>Tiene {{count($operario->datosNuevos())}} dato(s) para llamar</p>
+                                </div>
+                            </li>
                         @endforeach
                     </ul>
                 </div>

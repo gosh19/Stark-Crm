@@ -19,25 +19,31 @@
                     class="
                             {{(isset($selec[$dato->id])) ? 'bg-success':''}}
                             {{(count($dato->comentarios) != 0) ? 'bg-info text-white':''}}
+                            
                             "
                     >
                     <td class="pl-1 pr-1" scope="row">{{$dato->id}}</td>
                     <td>{{$dato->pedido}}</td>
-                    <td class="pr-1">{{$dato->name}}</td>
+                    <td class="pr-1 {{($dato->notification) ? 'bg-success':''}} ">{{$dato->name}} <br>{{($dato->notification) ? 'Volvio a dejar la consulta':''}}</td>
                     <td class="pr-1">{{$dato->email}}</td>
                     <td>{{$dato->telefono}}</td>
                     <td class="pr-1">{{$dato->hora_contacto}}</td>
 
                     <td style="width: 400px">
-                        <div class="row justify-content-around mb-3">
-                            <button wire:click="putCase({{$key}},'na')" class="btn btn-danger">NA</button>
-                            <button wire:click="showHideCollapse({{$key}})" data-toggle="collapse" href="#agenda-collapse-{{$dato->id}}" class="btn btn-success">Agendar</button>
-                            <button wire:click="putCase({{$key}},'posible')" class="btn btn-warning">Posible</button>
-                            
+                        <div class="d-flex">
+
+                            <select name="" id="" wire:change="selectCase($event.target.value)" class="custom-select custom-select-lg mb-3">
+                                <option value="">Selecciona una opcion</option>
+                                <option value="na">No atiende</option>
+                                <option value="ni">No interesado</option>
+                                <option value="posible">Posible interesado</option>
+                                <option value="vendido">Vendido</option>
+                            </select>
+                            <button wire:click="putCase({{$key}})" class="btn btn-primary ml-2">Cargar</button>
                         </div>
-                        <div class="row justify-content-around">
-                            <button wire:click="putCase({{$key}},'ni')" class="btn btn-primary">No interesado</button>
-                            <button wire:click="putCase({{$key}},'vendido')" class="btn btn-success">Vendido</button>
+                        <hr>
+                        <div class="row justify-content-around mb-3">
+                            <button wire:click="showHideCollapse({{$key}})" data-toggle="collapse" href="#agenda-collapse-{{$dato->id}}" class="btn btn-success">Presione para agendar</button>                            
                         </div>
                         <div class="collapse mt-3 {{$stateCollapse[$key] ?? null}} " id="agenda-collapse-{{$dato->id}}">
                             <div class="card">

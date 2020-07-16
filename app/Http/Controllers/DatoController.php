@@ -34,8 +34,11 @@ class DatoController extends Controller
         Excel::import($imp, request()->file('arch'));
         
         $repetidos = $imp->getRepetidos();
-
-        return view('datos.admin.datos-repetidos',['repetidos' => $repetidos]);
+        if (count($repetidos) != 0) {
+            # code...
+            return view('datos.admin.datos-repetidos',['repetidos' => $repetidos]);
+        }
+        return redirect()->back();
     }
 
 }
