@@ -27,7 +27,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/admin', 'AdminController@index')->name('Admin.index');
     Route::post('/user/store', 'UserController@store')->name('User.store');
     Route::get('/Datos/Admin', 'DatoController@index')->name('Dato.index');
-    /**Excel routes */
+    Route::post('/Dato/{Dato}', 'DatoController@changeOp')->name('Dato.changeOP');
 });
 
 
@@ -37,5 +37,4 @@ Route::group(['middleware' => ['operario']], function () {
 
     Route::get('/operario-putCase/{Dato}/{case}', 'OperarioController@putCase')->name('Operario.putCase');
     Route::post('/operario-re-agendar', 'OperarioController@reAgendar')->name('Operario.reAgendar');
-    /**Excel routes */
 });

@@ -23,12 +23,12 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4">
-                <div class="card">
+                <div class="card mb-3">
                     <div class="card-header">
                         Caja principal
                     </div>
                     <div class="card-body">
-
+                        @livewire('admin.buscador',['operarios'=> $operarios])
                     </div>
                 </div>
                 <div class="card">

@@ -41,4 +41,12 @@ class DatoController extends Controller
         return redirect()->back();
     }
 
+    public function changeOp(Dato $Dato, Request $request)
+    {
+        $Dato->user_id = $request->user_id;
+        $Dato->save();
+
+        return redirect()->back()->with('msg', 'Dato agregado con exito');
+    }
+
 }

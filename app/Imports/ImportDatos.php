@@ -17,11 +17,12 @@ class ImportDatos implements ToModel,WithHeadingRow
     */
     public function model(array $row)
     {
+
         if ($row['campaign_id'] != null) {
 
        
-            $dato = Dato::where('email',$row['correo_electronico'] ?? $row['email'] )
-                            ->orWhere('telefono', $row['numero_de_telefono'] ?? $row['phone_number'] ?? 1)
+            $dato = Dato::where('email',preg_replace('/[\x00-\x1F\x7F]/', '', $row['correo_electronico'] ??$row['email'] ??1 ))
+                            ->orWhere('telefono',preg_replace('/[\x00-\x1F\x7F]/', '', $row['numero_de_telefono'] ??$row['phone_number'] ?? 1))
                             ->first();
 
             if (!isset($row['nombre_completo'])) {
@@ -51,11 +52,11 @@ class ImportDatos implements ToModel,WithHeadingRow
                 if ($row['nombre_completo'] != null) {
                     session()->flash('datosNuevos' , session('datosNuevos')+1);
                     return new Dato([
-                        'name'     => $row['nombre_completo'],
-                        'pedido'        => $row['campaign_name'], 
-                        'hora_contacto'  => $row['horario_de_contacto'],
-                        'email'    => $row['correo_electronico'], 
-                        'telefono'     => $row['numero_de_telefono'],
+                        'name'     => preg_replace('/[\x00-\x1F\x7F]/', '',str_replace(array('"'), '', $row['nombre_completo']) ),
+                        'pedido'        => preg_replace('/[\x00-\x1F\x7F]/', '', str_replace(array('"'), '', $row['campaign_name'])), 
+                        'hora_contacto'  =>preg_replace('/[\x00-\x1F\x7F]/', '',  $row['horario_de_contacto']),
+                        'email'    => preg_replace('/[\x00-\x1F\x7F]/', '', $row['correo_electronico']), 
+                        'telefono'     =>preg_replace('/[\x00-\x1F\x7F]/', '',  $row['numero_de_telefono']),
                     ]);
                 }
             }else{
