@@ -7,6 +7,62 @@
             <input wire:model="data" id="data" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
         </div>
         <small for="data" class="form-text {{count($result) == 0 ? 'text-muted':'text-primary'}} ">Se encontraron <b> {{count($result)}}</b> dato(s)</small>
+        @if (count($result) == 0)
+            <button data-toggle="modal" data-target="#modal-dato-nuevo" class="btn btn-block btn-primary">Cargar nuevo dato</button>
+            <div class="modal fade" id="modal-dato-nuevo" tabindex="-1" role="dialog" aria-labelledby="modalDatoNuevo" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalDatoNuevo">Carga de dato nuevo</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{route('Dato.newDato')}}" method="POST">
+                            @csrf
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Email</label>
+                              <input type="email" class="form-control" name="email" id="exampleInputEmail1" placeholder="Correo electronico...">
+                            </div>
+                            <div class="form-group">
+                              <label for="nombre">Nombre</label>
+                              <input type="text" class="form-control" name="name" id="nombre" placeholder="Nombre...">
+                            </div>
+                            <div class="form-group">
+                                <label for="telefono">Telefono</label>
+                                <input type="text" class="form-control" value="{{$telefono}}" name="telefono" id="telefono" placeholder="Telefono...">
+                            </div>
+                            <div class="d-flex justify-content-between">
+
+                                <div class="form-group mr-3">
+                                    <label for="hora_contacto">Hora contacto</label>
+                                    <input type="text" class="form-control" name="hora_contacto" id="hora_contacto" placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="operario">Operario/a</label>
+                                    <select name="user_id" id="operario"  class="custom-select custom-select-lg">
+                                        <option value="">Selecciona...</option>
+                                        @foreach ($operarios as $key => $op)
+                                            <option value="{{$op->id}}">{{$op->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="pedido">Curso</label>
+                                <input type="text" class="form-control" name="pedido" id="pedido" placeholder="">
+                            </div>
+                            <button type="submit" class="btn btn-block btn-primary">Cargar</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        @endif
     </div>
     <ul class="list-group">
 

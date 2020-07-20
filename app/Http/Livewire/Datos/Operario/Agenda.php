@@ -50,6 +50,10 @@ class Agenda extends Component
     public function refresh()
     {
         $this->agendados = $this->operario->agendados(true);
+        foreach ($this->agendados as $key => $ag) {
+            $this->fecha[] = date_format($ag->agenda->fecha, 'Y/m/d H:i:s');
+            $this->anotacion[] = $ag->agenda->anotacion;
+        }
 
     }
     public function render()

@@ -57,6 +57,21 @@ class DatosList extends Component
         $this->selec = [];
     }
 
+    public function delete()
+    {
+        foreach ($this->selec as $i => $s) {
+            $auxDato = \App\Dato::find($s['id']);
+            $auxDato->delete();
+
+            foreach ($this->datos as $key => $d) {
+                if ($d['id'] == $s['id']) {
+                    unset($this->datos[$key]);
+                }
+            }
+            unset($this->selec[$i]);
+        }
+    }
+
     public function render()
     {
         return view('livewire.datos.admin.datos-list');

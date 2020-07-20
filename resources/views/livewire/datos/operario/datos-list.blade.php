@@ -7,9 +7,9 @@
                 <th class="pl-1">Id</th>
                 <th>Curso</th>
                 <th>Nombre</th>
-                <th>E-mail</th>
                 <th>Telefono</th>
-                <th>Horario</th>
+                <th>Email/Hs</th>
+                <th>Comentarios</th>
                 <th>---</th>
             </tr>
         </thead>
@@ -25,9 +25,14 @@
                     <td class="pl-1 pr-1" scope="row">{{$dato->id}}</td>
                     <td>{{$dato->pedido}}</td>
                     <td class="pr-1 {{($dato->notification) ? 'bg-success':''}} ">{{$dato->name}} <br>{{($dato->notification) ? 'Volvio a dejar la consulta':''}}</td>
-                    <td class="pr-1">{{$dato->email}}</td>
-                    <td>{{$dato->telefono}}</td>
-                    <td class="pr-1">{{$dato->hora_contacto}}</td>
+                    <td class="pr-1">{{$dato->telefono}}</td>
+                    <td>
+                        <ul class="list-group text-dark">
+                            <li class="list-group-item">{{$dato->email}}</li>
+                            <li class="list-group-item">{{$dato->hora_contacto}}</li>
+                        </ul>
+                    </td>
+                    <td class="pr-1">@livewire('datos.operario.comentario',['dato'=> $dato], key($dato->id))</td>
 
                     <td style="width: 400px">
                         <div class="d-flex">
@@ -54,7 +59,7 @@
                                 </div>
                             </div>
                         </div>
-                        @livewire('datos.operario.comentario',['dato'=> $dato], key($dato->id))
+                        
                     </td>
                 </tr>
             @endforeach

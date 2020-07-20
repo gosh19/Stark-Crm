@@ -10,6 +10,8 @@ class Buscador extends Component
     public $data = '';
     public $operarios;
 
+    public $telefono;
+
     public function mount($operarios)
     {
         $this->result = [];
@@ -29,6 +31,7 @@ class Buscador extends Component
         if ($this->data == '') {
             $datos= [];
         }
+        $this->telefono = $this->data;
 
         $this->result = $datos;
     }

@@ -49,4 +49,32 @@ class DatoController extends Controller
         return redirect()->back()->with('msg', 'Dato agregado con exito');
     }
 
+    public function store(Request $request)
+    {
+        $dato = new Dato;
+
+        $dato->name = $request->name;
+        $dato->telefono = $request->telefono;
+        $dato->email = $request->email;
+        $dato->pedido = $request->pedido;
+        $dato->hora_contacto = $request->hora_contacto;
+        $dato->user_id = $request->user_id;
+
+        $dato->save();
+
+        return \redirect()->back()->with('msg', 'Dato cargado correctamente');
+    }
+
+    public function verUsados($case = null)
+    {
+        if ($case == null) {
+            # code...
+            $datos = Dato::where('case','!=',null)->orderBy('case','desc')->get();
+        } else {
+            $datos = Dato::where('case',$case)->latest('updated_at')->get();
+        }
+
+        return view('datos.admin.datos-usados',['datos'=> $datos]);
+        
+    }
 }

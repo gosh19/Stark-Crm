@@ -2,6 +2,7 @@
     <div class="row mb-2">
 
         <button wire:click="refresh" class="rounded-circle btn btn-primary"><img src="/open-iconic/svg/loop-circular.svg" alt="icon name" style="width: 25px"></button>
+        <a href="{{route('Operario.agenda')}}">Ir a la agenda</a>
     </div>
     <div class="row">
 

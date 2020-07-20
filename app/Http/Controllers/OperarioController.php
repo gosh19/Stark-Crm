@@ -33,4 +33,16 @@ class OperarioController extends Controller
 
         return redirect()->back();
     }
+
+    public function agenda()
+    {
+        $agendados = \App\Dato::where('user_id',Auth::user()->id)->get();
+
+        for ($i=0; $i < count($agendados) ; $i++) { 
+            if (isset($agendados[$i]->agenda)) {
+                $auxAgenda[] = $agendados[$i];
+            }
+        }
+        return view('datos.operario.agenda',['datos'=> $auxAgenda]);
+    }
 }

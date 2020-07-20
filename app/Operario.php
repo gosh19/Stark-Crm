@@ -37,11 +37,13 @@ class Operario extends Model
             $hoy = \Carbon\Carbon::now();
 
             $datos = \App\Dato::where([['user_id',$this->id],['case',null]])->get();
-            $agendasProximas = \App\Agenda::where('fecha', '>=',$hoy)->get();
+
+            $agendasProximas = \App\Agenda::where('fecha', '>=',$hoy)->orderBy('fecha')->take(8)->get();
 
             $data = [];
-            foreach ($datos as $key => $dato) {
-                foreach ($agendasProximas as $key => $ax) {
+
+            foreach ($agendasProximas as $key => $ax) {
+                foreach ($datos as $key => $dato) {
                     if ($dato->id == $ax->dato_id) {
                         $dato->agenda->fecha = new \Carbon\Carbon($dato->agenda->fecha);
                         $data[] = $dato;
