@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Arr;
+
+
 class OperarioController extends Controller
 {
     public function index()
@@ -14,24 +17,31 @@ class OperarioController extends Controller
         return view('operario.index',['operario' => $operario]);
     }
 
-    public function putCase(\App\Dato $Dato,$case)
+    public function putCase(\App\Dato $Dato, Request $request)
     {
-        $Dato->case = $case;
+        $Dato->case = $request->case;
         $Dato->save();
 
-        return redirect()->back();
+        if (($request->case == 'ni')&& ($Dato->agenda != null)) {
+            $Dato->agenda->delete();
+        }
+
+        return redirect()->back()->with('msg', 'Guardado con exito');
     }
 
     public function reAgendar(Request $request)
     {
-        $agenda = \App\Agenda::find($request->id);
+        $agenda = \App\Agenda::firstOrNew(['dato_id' => $request->id]);
 
         $agenda->fecha = $request->fecha;
         $agenda->anotacion = $request->anotacion;
 
         $agenda->save();
 
-        return redirect()->back();
+        $agenda->dato->case = null;
+        $agenda->dato->save();
+
+        return redirect()->back()->with('msg','Agendado con exito');
     }
 
     public function agenda()
@@ -43,6 +53,23 @@ class OperarioController extends Controller
                 $auxAgenda[] = $agendados[$i];
             }
         }
-        return view('datos.operario.agenda',['datos'=> $auxAgenda]);
+
+        $aux = array_values(Arr::sort($auxAgenda, function ($value) {
+            return $value->agenda->fecha;
+        }));
+
+        $operario = \App\Operario::find(Auth::user()->id);
+
+        $aux = $operario->agendados();
+
+        //return $aux;
+        return view('datos.operario.agenda',['datos'=> $aux]);
+    }
+
+    public function verPosibles()
+    {
+        $datos = \App\Dato::where('case','posible')->orderBy('id','desc')->get();
+
+        return view('operario.posibles',['datos' => $datos]);
     }
 }

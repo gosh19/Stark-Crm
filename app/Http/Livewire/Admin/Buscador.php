@@ -12,10 +12,10 @@ class Buscador extends Component
 
     public $telefono;
 
-    public function mount($operarios)
+    public function mount()
     {
         $this->result = [];
-        $this->operarios = $operarios;
+        $this->operarios = \App\Operario::all();
     }
 
     public function buscar($data)

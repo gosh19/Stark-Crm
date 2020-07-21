@@ -65,16 +65,16 @@ class DatoController extends Controller
         return \redirect()->back()->with('msg', 'Dato cargado correctamente');
     }
 
-    public function verUsados($case = null)
+    public function verUsados($col = null,$order = 'desc')
     {
-        if ($case == null) {
-            # code...
-            $datos = Dato::where('case','!=',null)->orderBy('case','desc')->get();
-        } else {
-            $datos = Dato::where('case',$case)->latest('updated_at')->get();
+        if ($col != null) {
+            $datos = Dato::where('case','!=',null)->orderBy($col,$order)->get();
+        }else{
+            $datos = Dato::where('case','!=',null)->orderBy('updated_at',$order)->get();
         }
 
-        return view('datos.admin.datos-usados',['datos'=> $datos]);
+        $order = $order == 'desc' ? 'asc':'desc';
+        return view('datos.admin.datos-usados',['datos'=> $datos,'order' => $order]);
         
     }
 }

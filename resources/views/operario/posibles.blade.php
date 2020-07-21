@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="alert alert-info">
-    <h3>Datos agendados</h3>
-    <p>Aqui podra ver todos los datos que hayas agendado. Podras re-agendar o eliminar en caso de no estar interesado el dato.</p>
+    <h3>Posibles interesados</h3>
+    <p>Aqui podra ver todos los datos que sean posibles interesados, puedes dejar nuevas notas o agendarlos.</p>
 </div>
 <table class="table table-hover">
     <thead>
@@ -23,7 +23,6 @@
                 class="
                         {{(isset($selec[$dato->id])) ? 'bg-success':''}}
                         {{(count($dato->comentarios) != 0) ? 'bg-info text-white':''}}
-                        
                         "
                 >
                 <td class="pl-1 pr-1" scope="row">{{$dato->id}}</td>
@@ -35,8 +34,8 @@
                         <li class="list-group-item">{{$dato->email}}</li>
                         <li class="list-group-item">{{$dato->hora_contacto}}</li>
                         @if ($dato->agenda != null)
-                            <li class="list-group-item {{$dato->hoy ? 'bg-primary text-white':''}} ">
-                                <h5>Agendado para {{$dato->hoy ? 'HOY':'el'}}</h5>
+                            <li class="list-group-item">
+                                <h5>Agendado para el </h5>
                                 {{date('d-m-Y H:i',strtotime($dato->agenda->fecha))}} <br>
                                 {{$dato->agenda->anotacion}}
                             </li>

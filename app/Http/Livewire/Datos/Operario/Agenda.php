@@ -23,38 +23,20 @@ class Agenda extends Component
 
         foreach ($this->agendados as $key => $ag) {
             $this->fecha[] = date_format($ag->agenda->fecha, 'Y/m/d H:i:s');
-            $this->anotacion[] = $ag->agenda->anotacion;
+            $this->anotacion[] = $ag->agenda->anotacion.'-- N°'.$key;
         }
-
-    }
-
-    private function sortData($array)
-    {
-        $hoy = \Carbon\Carbon::now();
-
-        /*
-        $ordenado = array_values(\Illuminate\Support\Arr::sort($array, function ($value) {
-            //$fec = new \Carbon\Carbon($value['agenda']['fecha']);
-            if (!\Carbon\Carbon::now()->isAfter($value['agenda']['fecha'])) {
-                # code...
-                return $value['agenda']['fecha'];
-            }else{
-                return null;
-                return $value['agenda']['fecha'];
-            }));
-        }*/
-
-        return $array;
     }
 
     public function refresh()
     {
+        $this->agendados = [];
         $this->agendados = $this->operario->agendados(true);
         foreach ($this->agendados as $key => $ag) {
             $this->fecha[] = date_format($ag->agenda->fecha, 'Y/m/d H:i:s');
             $this->anotacion[] = $ag->agenda->anotacion;
         }
 
+        
     }
     public function render()
     {

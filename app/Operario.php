@@ -38,15 +38,24 @@ class Operario extends Model
 
             $datos = \App\Dato::where([['user_id',$this->id],['case',null]])->get();
 
-            $agendasProximas = \App\Agenda::where('fecha', '>=',$hoy)->orderBy('fecha')->take(8)->get();
+            $agendasProximas = \App\Agenda::whereDate('fecha', '>=',$hoy)->orderBy('fecha')->get();
 
             $data = [];
 
+            /**recorre el array de agenda y va comparando con el de datos, si uno contiene al otro lo agrega
+             * como el de agendas esta ordenado ya por fecha no hace falta hacer mas na
+             */
             foreach ($agendasProximas as $key => $ax) {
                 foreach ($datos as $key => $dato) {
                     if ($dato->id == $ax->dato_id) {
                         $dato->agenda->fecha = new \Carbon\Carbon($dato->agenda->fecha);
+                        if ($dato->agenda->fecha->isSameAs('d-m-Y',$hoy)) {
+                            $dato->hoy = true;
+                        }
                         $data[] = $dato;
+                        if (count($data) >= 8) {
+                            break 2;
+                        }
                         break;
                     }
                 }
@@ -55,18 +64,35 @@ class Operario extends Model
 
         }else{
 
+            $hoy = \Carbon\Carbon::now();
+
             $datos = \App\Dato::where([['user_id',$this->id],['case',null]])->get();
 
-            foreach ($datos as $key => $dato) {
-                if ($dato->agenda == null) {
-                    unset($datos[$key]);
-                }else{
-                    $dato->agenda->fecha = new \Carbon\Carbon($dato->agenda->fecha);
+            $agendasProximas = \App\Agenda::orderBy('fecha')->get();
+
+            $data = [];
+
+            /**recorre el array de agenda y va comparando con el de datos, si uno contiene al otro lo agrega
+             * como el de agendas esta ordenado ya por fecha no hace falta hacer mas na
+             */
+            foreach ($agendasProximas as $key => $ax) {
+                foreach ($datos as $key => $dato) {
+                    if ($dato->id == $ax->dato_id) {
+                        $dato->agenda->fecha = new \Carbon\Carbon($dato->agenda->fecha);
+                        if ($dato->agenda->fecha->isSameAs('d-m-Y',$hoy)) {
+                            $dato->hoy = true;
+                        }
+                        $data[] = $dato;
+                        break;
+                    }
                 }
             }
+            return $data;
         }
 
-        
+        $aux = array_values(Arr::sort($datos, function ($value) {
+            return $value->agenda->fecha;
+        }));
 
 
         return $datos;

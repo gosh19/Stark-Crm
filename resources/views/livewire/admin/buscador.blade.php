@@ -7,8 +7,8 @@
             <input wire:model="data" id="data" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
         </div>
         <small for="data" class="form-text {{count($result) == 0 ? 'text-muted':'text-primary'}} ">Se encontraron <b> {{count($result)}}</b> dato(s)</small>
-        @if (count($result) == 0)
-            <button data-toggle="modal" data-target="#modal-dato-nuevo" class="btn btn-block btn-primary">Cargar nuevo dato</button>
+        @if ((count($result) == 0) && (Auth::user()->rol == 'admin'))
+        <button data-toggle="modal" data-target="#modal-dato-nuevo" class="btn btn-block btn-primary">Cargar nuevo dato</button>
             <div class="modal fade" id="modal-dato-nuevo" tabindex="-1" role="dialog" aria-labelledby="modalDatoNuevo" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
@@ -102,25 +102,29 @@
                                             <li>{{$comment->comentario}}</li>
                                         @endforeach
                                     </ul>
-                                    <form action="{{ route('Dato.changeOP',['Dato'=> $item]) }}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="id">
-                                        <select name="user_id" id=""  class="custom-select custom-select-lg mb-3">
-                                            <option value="">Selecciona...</option>
-                                            @foreach ($operarios as $key => $op)
-                                                <option value="{{$op->id}}">{{$op->name}}</option>
-                                            @endforeach
-                                        </select>
-                                        <input type="submit" class="btn btn-block btn-success" value="Agregar">
+                                    @if (Auth::user()->rol == 'admin')
+                                        
+                                    
+                                      <form action="{{ route('Dato.changeOP',['Dato'=> $item]) }}" method="post">
+                                          @csrf
+                                          <input type="hidden" name="id">
+                                          <select name="user_id" id=""  class="custom-select custom-select-lg mb-3">
+                                              <option value="">Selecciona...</option>
+                                              @foreach ($operarios as $key => $op)
+                                                  <option value="{{$op->id}}">{{$op->name}}</option>
+                                              @endforeach
+                                          </select>
+                                          <input type="submit" class="btn btn-block btn-success" value="Agregar">
 
-                                    </form>
+                                      </form>
+
+                                    @endif
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                   </div>
                 </div>

@@ -1,17 +1,17 @@
 <div>
     <div class="card mh-100">
-        <div class="card-body bg-success font-weight-bolder p-2">
+        <div class="card-body {{($data->hoy) ? 'bg-primary':'bg-success'}} font-weight-bolder p-2">
             <p class="mb-1">
-                {{$data->name}}
+                {{$data->name}} <span class="text-white">{{($data->hoy) ? ' - Dato para HOY':''}}</span>
             </p>
             <p class="mb-1">
                 {{$data->agenda->anotacion}}
             </p>
             <div class="d-flex justify-content-between">
 
-                <u class="text-white">{{@date_format($data->agenda->fecha, 'd-m // H:i')}} Hs</u>
+                <u class="{{($data->hoy) ? 'text-white':'text-dark'}}">{{@date_format($data->agenda->fecha, 'd-m // H:i')}} Hs</u>
                 <button type="button" 
-                        class="btn btn-primary" 
+                        class="btn {{($data->hoy) ? 'btn-success': 'btn-primary'}}" 
                         data-toggle="modal" 
                         data-target="#modal-agenda-{{$data->id}}"
                 >
@@ -64,7 +64,6 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="{{route('Operario.putCase',['Dato' => $data, 'case' => 'na'])}}" class="btn btn-danger">NA</a>
                         <a href="{{route('Operario.putCase',['Dato' => $data, 'case' => 'ni'])}}" class="btn btn-primary">No interesado</a>        
                     </div>
                 </div>

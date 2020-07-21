@@ -12,14 +12,14 @@
 
     <table class="table table-hover">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Curso</th>
-                <th>Nombre</th>
-                <th>E-mail</th>
-                <th>Telefono</th>
-                <th>Horario</th>
-                <th>---</th>
+            <tr style="cursor: pointer">
+                <th><button class="btn btn-info" wire:click="sortBy('id')">Id</button> </th>
+                <th><button class="btn btn-info" wire:click="sortBy('pedido')">Curso</button> </th>
+                <th><button class="btn btn-info" wire:click="sortBy('name')">Nombre</button> </th>
+                <th><button class="btn btn-info" wire:click="sortBy('email')">E-mail</button> </th>
+                <th><button class="btn btn-info" wire:click="sortBy('telefono')">Telefono</button> </th>
+                <th><button class="btn btn-info" wire:click="sortBy('hora_contacto')">Horario</button> </th>
+                <th><button class="btn btn-info" wire:click="sortBy('updated_at')">Fecha dato</button></th>
             </tr>
         </thead>
         <tbody>

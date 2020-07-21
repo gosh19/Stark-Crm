@@ -1,25 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="d-flex justify-content-around mb-3">
-    <a class="btn btn-primary" href="{{route('Dato.usados')}}">Ver todos</a>
-    <a class="btn btn-danger" href="{{route('Dato.usados',['case'=>'na'])}}">Ver na</a>
-    <a class="btn btn-warning" href="{{route('Dato.usados',['case'=>'ni'])}}">Ver no interesados</a>
-    <a class="btn btn-info" href="{{route('Dato.usados',['case'=>'posible'])}}">Ver posibles</a>
-    <a class="btn btn-success" href="{{route('Dato.usados',['case'=>'vendido'])}}">Ver vendidos</a>
+<div class="alert alert-success">
+    <h3>Historial de datos</h3>
+    <p>
+        Aqui podras ver todos los datos y como fueron cargados. Recuerda q los datos <b>agendados</b> que aun no tienen un 
+        estado no se veran aqui hasta que se les asigne un estado.
+    </p>
 </div>
     <table class="table table-hover">
         <thead>
             <tr>
-                <th class="pr-0">Id</th>
-                <th>Curso</th>
-                <th>Nombre</th>
-                <th>E-mail</th>
-                <th>Telefono</th>
-                <th>Horario</th>
-                <th>---</th>
-                <th>Estado</th>
-                <th>Op</th>
+                <th class="pr-0"><a href="{{route('Dato.usados',['col'=> 'id','order'=>$order])}}">Id</a></th>
+                <th><a href="{{route('Dato.usados',['col'=> 'pedido','order'=>$order])}}">Curso</a></th>
+                <th><a href="{{route('Dato.usados',['col'=> 'name','order'=>$order])}}">Nombre</a></th>
+                <th><a href="{{route('Dato.usados',['col'=> 'email','order'=>$order])}}">E-mail</a></th>
+                <th><a href="{{route('Dato.usados',['col'=> 'telefono','order'=>$order])}}">Telefono</a></th>
+                <th><a href="{{route('Dato.usados',['col'=> 'hora_contacto','order'=>$order])}}">Horario</a></th>
+                <th><a href="{{route('Dato.usados',['col'=> 'updated_at','order'=>$order])}}">Ultima act.</a></th>
+                <th><a href="{{route('Dato.usados',['col'=> 'case','order'=>$order])}}">Estado</a></th>
+                <th><a href="{{route('Dato.usados',['col'=> 'user_id','order'=>$order])}}">Op</a></th>
             </tr>
         </thead>
         <tbody>

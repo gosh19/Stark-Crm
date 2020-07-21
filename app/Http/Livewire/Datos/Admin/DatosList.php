@@ -10,14 +10,24 @@ class DatosList extends Component
     public $datos;
 
     public $selec;
-    public $debug = '';
+    public $debug = 'asd';
     public $operarios;
+    public $order = 'desc';
 
     public function mount($datos)
     {
         $this->datos = $datos;
         $this->selec = array();
         $this->operarios = \App\Operario::getAll();
+    }
+
+    public function sortBy($col)
+    {
+        $datos = \App\Dato::where('case','!=',null)->orderBy($col,$this->order)->get();
+
+        $this->datos = $datos;
+        $this->debug = $this->order;
+        $this->order = $this->order == 'desc' ? 'asc':'desc';
     }
 
     public function submit($dato)

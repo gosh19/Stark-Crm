@@ -10,9 +10,12 @@
                 <div class="card-header">
                     {{$operario->name}}
                 </div>
-                <div class="card-body">
-                    {{$operario->email}}
-                </div>
+                    
+                <ul class="list-group">
+                    <li class="list-group-item">{{$operario->email}}</li>
+                    <li class="list-group-item"><a href="{{route('Operario.verPosibles')}}">Ir a posibles interesados</a></li>
+                    <li class="list-group-item">@livewire('admin.buscador')</li>
+                </ul>
             </div>
         </div>
 
