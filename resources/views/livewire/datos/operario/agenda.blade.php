@@ -1,8 +1,8 @@
 <div>
     <div class="row mb-2">
 
-        <button wire:click="refresh" class="rounded-circle btn btn-primary"><img src="/open-iconic/svg/loop-circular.svg" alt="icon name" style="width: 25px"></button>
-        <a class="ml-3" href="{{route('Operario.agenda')}}">Ir a la agenda</a>
+        <button wire:click="refresh" class="rounded-circle btn btn-primary"><i class="fas fa-redo fa-1x"></i></button>
+        <a class="ml-3 btn btn-info text-white font-weight-bolder" href="{{route('Operario.agenda')}}"><i class="fas fa-calendar-alt"></i> Ir a la agenda</a>
     </div>
     <div class="row">
         

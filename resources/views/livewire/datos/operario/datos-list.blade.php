@@ -1,8 +1,23 @@
 <div class="row">
-    <button wire:click="refresh" class="rounded-circle btn btn-primary"><img src="/open-iconic/svg/loop-circular.svg" alt="icon name" style="width: 25px"></button>
+    <div class="d-flex justify-content-between">
+        <div class="d-block">
+            <button data-toggle="tooltip" data-placement="top" title="Recargar tabla de datos" wire:click="refresh" class="rounded-circle btn btn-primary m-2">
+                <i class="fas fa-redo fa-1x"></i>
+            </button>
+        </div>
+        <div class="p-2">
+            @if ($theme == 'dark')
+                
+            <button data-toggle="tooltip" data-placement="left" title="Cambio de color" wire:click="changeTheme('light')" class="bg-light btn"><i class="fas fa-sun"></i></button>
+            @else
+                
+            <button data-toggle="tooltip" data-placement="left" title="Cambio de color" wire:click="changeTheme('dark')" class="bg-light btn"><i class="fas fa-moon"></i></button>
+            @endif
+        </div>
+    </div>
 
-    <table class="table table-hover">
-        <thead>
+    <table class="table table-{{$theme}}  table-hover table-striped">
+        <thead style="background-color: rgb(4, 26, 99);color:#FFF;">
             <tr>
                 <th class="pl-1">Id</th>
                 <th>Curso</th>
@@ -27,14 +42,14 @@
                     <td class="pr-1 {{($dato->notification) ? 'bg-success':''}} ">{{$dato->name}} <br>{{($dato->notification) ? 'Volvio a dejar la consulta':''}}</td>
                     <td class="pr-1">{{$dato->telefono}}</td>
                     <td>
-                        <ul class="list-group text-dark">
+                        <ul class="list-group text-dark border border-dark">
                             <li class="list-group-item">{{$dato->email}}</li>
                             <li class="list-group-item">{{$dato->hora_contacto}}</li>
                         </ul>
                     </td>
-                    <td class="pr-1">@livewire('datos.operario.comentario',['dato'=> $dato], key($dato->id))</td>
+                    <td style="width: 300px" class="pr-1">@livewire('datos.operario.comentario',['dato'=> $dato], key($dato->id))</td>
 
-                    <td style="width: 400px">
+                    <td style="width: 300px">
                         <div class="d-flex">
 
                             <select name="" id="" wire:change="selectCase($event.target.value)" class="custom-select custom-select-lg mb-3">
@@ -42,6 +57,7 @@
                                 <option value="na">No atiende</option>
                                 <option value="ni">No interesado</option>
                                 <option value="posible">Posible interesado</option>
+                                <option value="cambio_turno">Pasar de turno</option>
                                 <option value="vendido">Vendido</option>
                             </select>
                             <button wire:click="putCase({{$key}})" class="btn btn-primary ml-2">Cargar</button>

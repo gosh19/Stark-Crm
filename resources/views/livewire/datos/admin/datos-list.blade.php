@@ -1,5 +1,11 @@
 <div>
-    <h4>Hay {{count($selec)}} datos seleccionados</h4>
+    <div class="d-flex justify-content-between">
+
+        <h4 class="{{count($selec) == 0? 'p-2 alert alert-danger':'p-2 alert alert-info'}}">{{count($selec)}} dato(s) seleccionados</h4>
+        <h4 class="text-right 
+                    {{count($datos) > 10? 'p-2 alert alert-primary':'p-2 alert alert-danger'}} "
+            >Quedan {{count($datos)}} dato(s)</h4>
+    </div>
     @if (count($selec) != 0)
         <button wire:click="delete" class="btn btn-danger mb-3" >Eliminar</button>
     @endif

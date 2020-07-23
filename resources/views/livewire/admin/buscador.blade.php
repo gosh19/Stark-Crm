@@ -2,9 +2,9 @@
     <div class="form-group">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default">Buscador</span>
+            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas fa-search fa-1x"></i></span>
             </div>
-            <input wire:model="data" id="data" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            <input wire:model="data" id="data" type="text" placeholder="Num. telefono..." class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
         </div>
         <small for="data" class="form-text {{count($result) == 0 ? 'text-muted':'text-primary'}} ">Se encontraron <b> {{count($result)}}</b> dato(s)</small>
         @if ((count($result) == 0) && (Auth::user()->rol == 'admin'))
@@ -76,7 +76,7 @@
             <p>{{$item->email}}</p>
             <button data-toggle="modal" data-target="#modal-dato-{{$item->id}}" class="btn btn-block btn-primary">Ver</button>
             <div class="modal fade" id="modal-dato-{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
+                <div class="modal-dialog modal-lg" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalLabel">Informacion del dato</h5>
@@ -96,16 +96,19 @@
                                 </div>
                                 <div class="col-md-6">
                                     <p>{{($item->user_id == null)? 'No pertenece a nadie aun':'Pertenece a '.$item->user->name }}</p>
-                                    <h5>{{count($item->comentarios)==0 ? '':"Comentarios"}}</h5>
-                                    <ul>
+                                    <div class="mb-3">
+
+                                      <h5>{{count($item->comentarios)==0 ? '':"Comentarios"}}</h5>
+                                      <ul>
                                         @foreach ($item->comentarios as $key => $comment)
-                                            <li>{{$comment->comentario}}</li>
+                                        <li>{{$comment->comentario}}</li>
                                         @endforeach
-                                    </ul>
-                                    @if (Auth::user()->rol == 'admin')
-                                        
-                                    
-                                      <form action="{{ route('Dato.changeOP',['Dato'=> $item]) }}" method="post">
+                                      </ul>
+                                    </div>
+                                    <div>
+                                      @if (Auth::user()->rol == 'admin')
+                                           
+                                        <form class="mb-3" action="{{ route('Dato.changeOP',['Dato'=> $item]) }}" method="post">
                                           @csrf
                                           <input type="hidden" name="id">
                                           <select name="user_id" id=""  class="custom-select custom-select-lg mb-3">
@@ -115,16 +118,26 @@
                                               @endforeach
                                           </select>
                                           <input type="submit" class="btn btn-block btn-success" value="Agregar">
-
+                                        </form>
+                                        <hr>
+                                      @endif
+                                    </div>
+                                    <div class="mb-3">
+                                      <form action="{{route('Comentario.store')}}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="dato_id" value="{{$item->id}}">
+                                        <div class="input-group mb-3">
+                                          <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-pencil-alt"></i></span>
+                                          </div>
+                                          <input type="text" class="form-control" name="comentario" placeholder="Comentario...">
+                                        </div>
+                                        <input type="submit" class="btn btn-block btn-primary" value="Cargar">
                                       </form>
-
-                                    @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                   </div>
                 </div>

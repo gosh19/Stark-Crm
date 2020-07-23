@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Comentario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ComentarioController extends Controller
 {
@@ -43,6 +44,7 @@ class ComentarioController extends Controller
 
         $comentario->save();
 
+        return redirect()->back()->with('msg','Comentario cargado');
         
     }
 

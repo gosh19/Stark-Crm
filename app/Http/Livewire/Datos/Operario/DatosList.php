@@ -15,6 +15,7 @@ class DatosList extends Component
     public $fecha;
     public $stateCollapse;
     public $case;
+    public $theme = 'dark';
 
     protected $listeners = ['refreshRow'];
 
@@ -39,9 +40,20 @@ class DatosList extends Component
         $this->case = $case;
     }
 
+    public function changeTheme($theme)
+    {
+        $this->theme = $theme;
+    }
+
     public function putCase($key)
     {
-        $this->datos[$key]->case = $this->case;
+        if ($this->case == 'cambio_turno') {
+            $this->datos[$key]->hora_contacto = $this->case;
+            $this->datos[$key]->user_id = null;
+        }else{
+
+            $this->datos[$key]->case = $this->case;
+        }
         $this->datos[$key]->save();
         unset($this->datos[$key]);
         $this->emitSelf('postAdded',['postId'=> 1]);
