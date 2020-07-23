@@ -30,8 +30,11 @@ class Redirect
                     # code...
                     break;
             }
-            return redirect($redirect);
+        }else{
+
+            $redirect = RouteServiceProvider::LOGIN;
         }
-        return $next($request);
+        
+        return redirect($redirect);
     }
 }

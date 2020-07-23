@@ -23,6 +23,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/home';
     public const INDEX = '/';
+    public const LOGIN = '/login';
     public const ADMIN = '/admin';
     public const OPERARIO = '/operario';
     /**
