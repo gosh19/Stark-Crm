@@ -23,7 +23,7 @@
                             @csrf
                             <div class="form-group">
                               <label for="exampleInputEmail1">Email</label>
-                              <input type="email" class="form-control" name="email" id="exampleInputEmail1" placeholder="Correo electronico...">
+                              <input type="text" class="form-control" name="email" id="exampleInputEmail1" placeholder="Correo electronico...">
                             </div>
                             <div class="form-group">
                               <label for="nombre">Nombre</label>
