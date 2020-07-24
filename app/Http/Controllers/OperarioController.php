@@ -68,7 +68,7 @@ class OperarioController extends Controller
 
     public function verPosibles()
     {
-        $datos = \App\Dato::where('case','posible')->orderBy('id','desc')->get();
+        $datos = \App\Dato::where([['case','posible'],['user_id'=> Auth::user()->id]])->orderBy('id','desc')->get();
 
         return view('operario.posibles',['datos' => $datos]);
     }
