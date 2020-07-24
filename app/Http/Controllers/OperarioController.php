@@ -48,6 +48,7 @@ class OperarioController extends Controller
     {
         $agendados = \App\Dato::where('user_id',Auth::user()->id)->get();
 
+        $auxAgenda = [];
         for ($i=0; $i < count($agendados) ; $i++) { 
             if (isset($agendados[$i]->agenda)) {
                 $auxAgenda[] = $agendados[$i];
