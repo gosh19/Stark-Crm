@@ -23,7 +23,7 @@ class DatosList extends Component
 
     public function sortBy($col)
     {
-        $datos = \App\Dato::where('case','!=',null)->orderBy($col,$this->order)->get();
+        $datos = \App\Dato::where('user_id',null)->orderBy($col,$this->order)->get();
 
         $this->datos = $datos;
         $this->debug = $this->order;
