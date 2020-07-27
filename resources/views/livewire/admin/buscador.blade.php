@@ -96,6 +96,21 @@
                                 </div>
                                 <div class="col-md-6">
                                     <p>{{($item->user_id == null)? 'No pertenece a nadie aun':'Pertenece a '.$item->user->name }}</p>
+                                    <p class="alert alert-info w-100 rounded" >{{($item->case != null)? 'Fue cargado como '.$item->case :''}}</p>
+                                    @if (($item->user_id != null)&&($item->case != null))
+                                        <form action="{{route('Operario.putCase',['Dato' => $item])}}" method="post">
+                                          @csrf
+                                          <select name="case" id="" class="custom-select custom-select-lg mb-3">
+                                            <option value="{{null}}">Volver a la principal</option>
+                                            <option value="na">No atiende</option>
+                                            <option value="ni">No interesado</option>
+                                            <option value="posible">Posible interesado</option>
+                                            <option value="cambio_turno">Pasar de turno</option>
+                                            <option value="vendido">Vendido</option>
+                                          </select>
+                                          <input type="submit" class="btn btn-danger" value="Cargar">
+                                        </form>
+                                    @endif
                                     <div class="mb-3">
 
                                       <h5>{{count($item->comentarios)==0 ? '':"Comentarios"}}</h5>
