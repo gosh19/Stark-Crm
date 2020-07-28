@@ -78,9 +78,9 @@
                             </div>
                         </div>
                         <div class="d-flex">
-
-                            <a href="{{route('Operario.putCase',['Dato' => $data, 'case' => 'ni'])}}" class="btn btn-primary">No interesado</a>        
-                            <a href="{{route('Operario.putCase',['Dato' => $data, 'case' => 'vendido'])}}" class="btn btn-success ml-3">Vendido</a>   
+                            <a href="{{route('Operario.putCase',['Dato' => $data, 'case' => 'posible'])}}" class="btn btn-primary mr-3">Posible</a> 
+                            <a href="{{route('Operario.putCase',['Dato' => $data, 'case' => 'ni'])}}" class="btn btn-danger mr-3">No interesado</a>        
+                            <a href="{{route('Operario.putCase',['Dato' => $data, 'case' => 'vendido'])}}" class="btn btn-success">Vendido</a>   
                         </div>
                     </div>
                 </div>
