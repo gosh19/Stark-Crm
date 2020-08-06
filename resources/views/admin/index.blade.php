@@ -20,7 +20,7 @@
     </script>
         
     @endif
-    <div class="container-fluid">
+    <div class="container-fluid pt-3">
         <div class="row">
             <div class="col-md-4">
                 <div class="card mb-3">

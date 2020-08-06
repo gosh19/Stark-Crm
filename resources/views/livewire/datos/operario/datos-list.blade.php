@@ -53,7 +53,7 @@
                         <div class="d-flex">
 
                             <select name="" id="" wire:change="selectCase($event.target.value)" class="custom-select custom-select-lg mb-3">
-                                <option value="">Selecciona una opcion</option>
+                                <option value="{{NULL}}">Selecciona una opcion</option>
                                 <option value="na">No atiende</option>
                                 <option value="ni">No interesado</option>
                                 <option value="posible">Posible interesado</option>

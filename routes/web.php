@@ -10,6 +10,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::view('/asd', 'mail.na');
 Route::group(['middleware' => ['admin']], function () {
     
     Route::post('import', 'DatoController@import');
