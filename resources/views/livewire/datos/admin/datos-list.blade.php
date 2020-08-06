@@ -7,7 +7,44 @@
             >Quedan {{count($datos)}} dato(s)</h4>
     </div>
     @if (count($selec) != 0)
-        <button wire:click="delete" class="btn btn-danger mb-3" >Eliminar</button>
+    <div class="d-flex justify-content-between m-3">
+        <div>
+            <div class="input-group">
+                <div class="input-group-prepend mr-3">
+                  <div class="input-group-text">
+                    <input type="radio" name="horario" wire:click="setHorario('10:00hs_a_12:00hs')" checked>
+                  </div>
+                </div>
+                <label for="">10:00hs_a_12:00hs</label>
+            </div>
+            <div class="input-group">
+                <div class="input-group-prepend mr-3">
+                  <div class="input-group-text">
+                    <input type="radio" name="horario" wire:click="setHorario('12:00hs_a_14:00hs')">
+                  </div>
+                </div>
+                <label for="">12:00hs_a_14:00hs</label>
+            </div>
+            <div class="input-group">
+                <div class="input-group-prepend mr-3">
+                  <div class="input-group-text">
+                    <input type="radio" name="horario" wire:click="setHorario('14:00hs_a_16:00hs')">
+                  </div>
+                </div>
+                <label for="">14:00hs_a_16:00hs</label>
+            </div>
+            <div class="input-group">
+                <div class="input-group-prepend mr-3">
+                  <div class="input-group-text">
+                    <input type="radio" name="horario" wire:click="setHorario('16:00hs_a_18:00hs')">
+                  </div>
+                </div>
+                <label for="">16:00hs_a_18:00hs</label>
+            </div>
+            <button wire:click="modificarHorario" class="btn btn-warning mb-3" >Modificar</button>
+        </div>
+        <button  wire:click="delete" class="btn btn-danger mb-3 mr-3" >Eliminar</button>
+    </div>
     @endif
 
     <div class="d-flex justify-content-around mb-3">

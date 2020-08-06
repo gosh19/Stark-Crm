@@ -20,6 +20,8 @@ Route::group(['middleware' => ['admin']], function () {
 
     Route::post('/Dato/{Dato}', 'DatoController@changeOp')->name('Dato.changeOP');
     Route::post('new-dato', 'DatoController@store')->name('Dato.newDato');
+
+    Route::post('/pasar-usado', 'DatoController@pasarUsado')->name('Dato.pasarUsado');
     
 });
 

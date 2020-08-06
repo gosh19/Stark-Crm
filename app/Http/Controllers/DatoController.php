@@ -72,9 +72,25 @@ class DatoController extends Controller
         }else{
             $datos = Dato::where('case','!=',null)->orderBy('updated_at',$order)->get();
         }
+        $operarios = \App\Operario::all();
 
         $order = $order == 'desc' ? 'asc':'desc';
-        return view('datos.admin.datos-usados',['datos'=> $datos,'order' => $order]);
+        return view('datos.admin.datos-usados',['datos'=> $datos,'order' => $order,'operarios' => $operarios]);
         
+    }
+
+    public function pasarUsado(Request $request)
+    {
+        $validator = $request->validate([
+            'id' => ['required'],
+        ]);
+        foreach ($request->dato as $key => $dato) {
+            $d = Dato::find($dato);
+            $d->user_id = $request->id;
+            $d->case = NULL;
+            $d->save();
+        }
+
+        return redirect()->back()->with('msg','Se cargaron con exito '.$key.' dato(s) con exito');
     }
 }

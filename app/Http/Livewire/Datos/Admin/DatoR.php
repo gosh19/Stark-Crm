@@ -23,11 +23,11 @@ class DatoR extends Component
 
         $datoNew = new \App\Dato;
 
-        $datoNew->name = preg_replace('/[\x00-\x1F\x7F]/', '',str_replace(array('"'), '', $repetido['dataNew']['nombre_completo']));
-        $datoNew->email = preg_replace('/[\x00-\x1F\x7F]/', '',str_replace(array('"'), '', $repetido['dataNew']['correo_electronico']));
-        $datoNew->telefono = preg_replace('/[\x00-\x1F\x7F]/', '',str_replace(array('"'), '',$repetido['dataNew']['numero_de_telefono']));
-        $datoNew->pedido = preg_replace('/[\x00-\x1F\x7F]/', '',str_replace(array('"'), '', $repetido['dataNew']['campaign_name']));
-        $datoNew->hora_contacto = preg_replace('/[\x00-\x1F\x7F]/', '',str_replace(array('"'), '', $repetido['dataNew']['horario_de_contacto']));
+        $datoNew->name = preg_replace('/[\x00-\x1F\x7F]/', '',str_replace(array('"'), '', $this->repetido['dataNew']['nombre_completo']));
+        $datoNew->email = preg_replace('/[\x00-\x1F\x7F]/', '',str_replace(array('"'), '', $this->repetido['dataNew']['correo_electronico']));
+        $datoNew->telefono = preg_replace('/[\x00-\x1F\x7F]/', '',str_replace(array('"'), '',$this->repetido['dataNew']['numero_de_telefono']));
+        $datoNew->pedido = preg_replace('/[\x00-\x1F\x7F]/', '',str_replace(array('"'), '', $this->repetido['dataNew']['campaign_name']));
+        $datoNew->hora_contacto = preg_replace('/[\x00-\x1F\x7F]/', '',str_replace(array('"'), '', $this->repetido['dataNew']['horario_de_contacto']));
 
         $datoNew->save();
         $this->theme = 'bg-primary';

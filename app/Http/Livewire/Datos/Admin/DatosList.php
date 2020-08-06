@@ -13,6 +13,7 @@ class DatosList extends Component
     public $debug = 'asd';
     public $operarios;
     public $order = 'desc';
+    public $horario = '10:00hs_a_12:00hs';
 
     public function mount($datos)
     {
@@ -48,6 +49,31 @@ class DatosList extends Component
         }
         $this->selec = $aux;
 
+    }
+
+    public function setHorario($horario)
+    {
+        $this->horario = $horario;
+    }
+
+    public function modificarHorario()
+    {
+        foreach ($this->selec as $key => $s) {
+            $auxDato = \App\Dato::find($s['id']);
+            $auxDato->hora_contacto = $this->horario;
+            $auxDato->save();
+            
+            foreach ($this->datos as $key => $d) {
+                if ($d['id'] == $s['id']) {
+                    unset($this->datos[$key]);
+                }
+            }
+        }
+        $datos = \App\Dato::where('user_id',null)->orderBy('id','desc')->get();
+
+        $this->datos = $datos;
+
+        $this->selec = [];
     }
 
 
