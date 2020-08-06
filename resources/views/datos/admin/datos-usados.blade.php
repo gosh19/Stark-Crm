@@ -9,7 +9,7 @@
         estado no se veran aqui hasta que se les asigne un estado.
     </p>
 </div>
-    <table class="table table-hover">
+    <table class="table table-hover w-100">
         <thead>
             <tr>
                 <th class="pr-0"><a href="{{route('Dato.usados',['col'=> 'id','order'=>$order])}}">Id</a></th>
@@ -33,15 +33,18 @@
                             <p>Debe seleccionar al menos un operario</p>
                         </div>
                     @endif
-                    <div class="d-flex justify-content-around m-3">
+                    <div class="row justify-content-around m-3">
                         @foreach ($operarios as $op)
-                        <div class="input-group">
-                            <div class="input-group-prepend mr-3">
-                            <div class="input-group-text">
-                                <input name="id" type="radio" value="{{$op->id}}">
+                        <div class="col-2">
+
+                            <div class="input-group">
+                                <div class="input-group-prepend mr-3">
+                                    <div class="input-group-text">
+                                        <input name="id" type="radio" value="{{$op->id}}">
+                                    </div>
+                                </div>
+                                <label for="">{{$op->name}}</label>
                             </div>
-                            </div>
-                            <label for="">{{$op->name}}</label>
                         </div>
                         @endforeach
                     </div>
@@ -79,8 +82,8 @@
                         class="{{$theme}}"
                         >
                         <td scope="row" class="pr-0">{{$dato->id}}</td>
-                        <td>{{$dato->pedido}}</td>
-                        <td>{{$dato->name}}</td>
+                        <td style="max-width: 150px">{{$dato->pedido}}</td>
+                        <td style="max-width: 150px">{{$dato->name}}</td>
                         <td>{{$dato->email}}</td>
                         <td>{{$dato->telefono}}</td>
                         <td>{{$dato->hora_contacto}}</td>

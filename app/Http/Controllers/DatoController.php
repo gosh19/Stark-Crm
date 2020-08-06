@@ -72,7 +72,7 @@ class DatoController extends Controller
         }else{
             $datos = Dato::where('case','!=',null)->orderBy('updated_at',$order)->get();
         }
-        $operarios = \App\Operario::all();
+        $operarios = \App\Operario::where('rol','operario')->get();
 
         $order = $order == 'desc' ? 'asc':'desc';
         return view('datos.admin.datos-usados',['datos'=> $datos,'order' => $order,'operarios' => $operarios]);
@@ -91,6 +91,6 @@ class DatoController extends Controller
             $d->save();
         }
 
-        return redirect()->back()->with('msg','Se cargaron con exito '.$key.' dato(s) con exito');
+        return redirect()->back()->with('msg','Se cargaron con exito '.($key+1).' dato(s) con exito');
     }
 }
