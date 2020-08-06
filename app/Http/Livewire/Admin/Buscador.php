@@ -24,10 +24,15 @@ class Buscador extends Component
 
     public function updated()
     {
-        $datos = \App\Dato::where('telefono','LIKE','%'.$this->data.'%')->take(5)->get();
+        $datos = \App\Dato::where('telefono','LIKE','%'.$this->data.'%')
+                            ->orWhere('email','LIKE', '%'.$this->data.'%')
+                            ->orWhere('name','LIKE', '%'.$this->data.'%')
+                            ->take(5)->get();
+
         if ($this->data == '') {
             $datos= [];
         }
+        
         $this->telefono = $this->data;
 
         $this->result = $datos;
