@@ -12,6 +12,8 @@ class MailNa extends Mailable
     use Queueable, SerializesModels;
 
     public $dato;
+    public $subject = "No te pudimos contactar | WORK NOW";
+    
     /**
      * Create a new message instance.
      *
