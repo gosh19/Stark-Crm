@@ -84,13 +84,15 @@ class DatoController extends Controller
         $validator = $request->validate([
             'id' => ['required'],
         ]);
+        $cant = 0;
         foreach ($request->dato as $key => $dato) {
             $d = Dato::find($dato);
             $d->user_id = $request->id;
             $d->case = NULL;
             $d->save();
+            $cant++;
         }
 
-        return redirect()->back()->with('msg','Se cargaron con exito '.($key+1).' dato(s) con exito');
+        return redirect()->back()->with('msg','Se cargaron con exito '.($cant+1).' dato(s) con exito');
     }
 }
