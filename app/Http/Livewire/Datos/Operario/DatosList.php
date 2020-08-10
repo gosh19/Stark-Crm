@@ -9,6 +9,7 @@ use Carbon\Carbon;
 class DatosList extends Component
 {
     public $datos;
+    public $destacados;
     public $anotacion;
     public $operario;
     public $debug = '1';
@@ -29,6 +30,7 @@ class DatosList extends Component
         $this->operario = $operario;
 
         $this->datos = $operario->datosNuevos();
+        $this->destacados = $operario->destacados();
         
         $this->fecha = '';
         $this->anotacion = '';
@@ -49,6 +51,7 @@ class DatosList extends Component
     {
         if ($this->case == 'cambio_turno') {
             $this->datos[$key]->hora_contacto = $this->case;
+            $this->datos[$key]->case = null;
             $this->datos[$key]->user_id = null;
         }else{
 
@@ -56,6 +59,20 @@ class DatosList extends Component
         }
         $this->datos[$key]->save();
         unset($this->datos[$key]);
+        $this->emitSelf('postAdded',['postId'=> 1]);
+    }
+
+    public function putCaseDestacado($key)
+    {
+        if ($this->case == 'cambio_turno') {
+            $this->destacados[$key]->hora_contacto = $this->case;
+            $this->destacados[$key]->case = null;
+            $this->destacados[$key]->user_id = null;
+        }else{
+            $this->destacados[$key]->case = $this->case;
+        }
+        $this->destacados[$key]->save();
+        unset($this->destacados[$key]);
         $this->emitSelf('postAdded',['postId'=> 1]);
     }
 
@@ -68,9 +85,23 @@ class DatosList extends Component
         $this->fecha = '';
     }
 
+    public function agendarDatoDestacado($key)
+    {
+        \App\Agenda::updateOrCreate(['dato_id'=> $this->destacados[$key]->id], ['fecha' => $this->fecha, 'anotacion' => $this->anotacion]);
+        unset($this->stateCollapse[$key]);
+        $dato = \App\Dato::find($this->destacados[$key]->id);
+        $dato->case = null;
+        $dato->save();
+        
+        unset($this->destacados[$key]);
+        $this->anotacion = '';
+        $this->fecha = '';
+        $this->destacados = $this->operario->destacados();
+    }
+
     public function updated()
     {
-        $this->debug = 'weno';
+        //
     }
 
     public function showHideCollapse($key)
@@ -85,6 +116,7 @@ class DatosList extends Component
     public function refresh()
     {
         $this->datos = $this->operario->datosNuevos();
+        $this->destacados = $this->operario->destacados();
 
     }
 

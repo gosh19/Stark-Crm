@@ -44,6 +44,12 @@ class ComentarioController extends Controller
 
         $comentario->save();
 
+        if (Auth::user()->rol == 'admin') {
+            $dato = \App\Dato::find($request->dato_id);
+            $dato->case = 'destacado';
+            $dato->save();
+        }
+
         return redirect()->back()->with('msg','Comentario cargado');
         
     }

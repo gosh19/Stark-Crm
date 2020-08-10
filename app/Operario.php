@@ -16,13 +16,20 @@ class Operario extends Model
 
     public function datosNuevos()
     {
-        $datos = \App\Dato::where([['user_id',$this->id],['case',null]])->latest('updated_at')->get();
+        $datos = \App\Dato::where([['user_id',$this->id],['case',null]])->orderBy('updated_at')->get();
 
         foreach ($datos as $key => $dato) {
             if ($dato->agenda != null) {
                 unset($datos[$key]);
             }
         }
+
+        return $datos;
+    }
+
+    public function destacados()
+    {
+        $datos = \App\Dato::where([['user_id',$this->id],['case','destacado']])->orderBy('updated_at')->get();
 
         return $datos;
     }

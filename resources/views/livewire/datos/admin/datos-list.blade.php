@@ -43,7 +43,12 @@
             </div>
             <button wire:click="modificarHorario" class="btn btn-warning mb-3" >Modificar</button>
         </div>
-        <button  wire:click="delete" class="btn btn-danger mb-3 mr-3" >Eliminar</button>
+        <button wire:click="delete" 
+                data-toggle="tooltip" 
+                data-placement="left" 
+                title="EL DATO SE ELIMINARA DE LA BASE!!" 
+                class="btn btn-danger mb-3 mr-3" 
+        >Eliminar</button>
     </div>
     @endif
 
