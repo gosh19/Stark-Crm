@@ -24,20 +24,20 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="card mb-3">
-                    <div class="card-header">
+                    <div class="card-header degree-bluegray font-weight-bolder">
                         Caja principal
                     </div>
                     <div class="card-body">
                         @livewire('admin.buscador',['operarios'=> $operarios])
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-header">
+                <div class="card mb-3">
+                    <div class="card-header degree-bluegray font-weight-bolder">
                         Operarios
                     </div>
                     <ul class="list-group">
                         @foreach ($operarios as $operario)
-                            <li class="list-group-item">
+                            <li class="list-group-item {{count($operario->datosNuevos()) < 5 ? 'bg-danger text-white':'bg-success'}} ">
                                 <div class="d-flex justify-content-between">
 
                                     <p>{{$operario->name}}</p>
@@ -51,8 +51,8 @@
             </div>
             <div class="col-md-8">
 
-                <div class="card border-primary">
-                    <div class="card-header">
+                <div class="card border-primary mb-3">
+                    <div class="card-header degree-bluegray font-weight-bolder">
                         Funciones
                     </div>
                     <ul class="list-group">
@@ -78,6 +78,22 @@
                     <div class="collapse m-3" id="form-create-user">
                         @livewire('form-create-user')
                     </div>
+                </div>
+
+                <div class="p-3 border border-dark rounded degree-gray mb-3" >
+                    {!! $chart->container() !!}
+ 
+                    <script src="{{ $chart->cdn() }}"></script>
+                
+                    {{ $chart->script() }}
+                </div>
+
+                <div class="p-3 border border-dark rounded degree-gray mb-3" >
+                    {!! $OpChart->container() !!}
+ 
+                    <script src="{{ $OpChart->cdn() }}"></script>
+                
+                    {{ $OpChart->script() }}
                 </div>
             </div>
         </div>

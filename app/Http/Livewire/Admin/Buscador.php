@@ -19,7 +19,7 @@ class Buscador extends Component
     public function mount()
     {
         $this->result = [];
-        $this->operarios = \App\Operario::all();
+        $this->operarios = \App\Operario::getAll();
     }
 
     public function updated()
