@@ -19,3 +19,44 @@ background: -ms-linear-gradient(-45deg, rgba(212,228,239,1) 0%, rgba(27,109,163,
 background: linear-gradient(135deg, rgba(212,228,239,1) 0%, rgba(27,109,163,1) 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4e4ef', endColorstr='#1b6da3', GradientType=1 );
 }
+
+.degree-blue{
+    background: rgba(255,255,255,1);
+    background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(4,24,99,1) 22%, rgba(4,24,99,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(22%, rgba(4,24,99,1)), color-stop(100%, rgba(4,24,99,1)));
+    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(4,24,99,1) 22%, rgba(4,24,99,1) 100%);
+    background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(4,24,99,1) 22%, rgba(4,24,99,1) 100%);
+    background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(4,24,99,1) 22%, rgba(4,24,99,1) 100%);
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(4,24,99,1) 22%, rgba(4,24,99,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#041863', GradientType=0 );
+}
+.box-option{
+    padding: 20px;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+.box-option>div>div{
+    width: 100%;
+    border: 1px solid black;
+}
+
+.nota{
+    padding: 15px;
+    border-radius: 0px 15px 0px 0px;
+    background: linear-gradient(45deg, rgb(248, 211, 89),rgb(202, 163, 33));
+}
+.nota>h5{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.nota button{
+    background: none;
+    border: 1.5px solid rgb(109, 79, 33);
+}
+
+.box{
+    padding: 15px;
+    border-width: 3px;
+    border-style: solid;
+
+}

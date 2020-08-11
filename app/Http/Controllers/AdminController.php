@@ -16,6 +16,8 @@ class AdminController extends Controller
 
         $datos = \App\Dato::whereDate( 'updated_at',$hoy)->get();
 
+        $notas = \App\Nota::take(7)->latest()->get();
+
         $cantNa = 0;
         $cantPosible = 0;
         $cantVendido = 0;
@@ -67,7 +69,7 @@ class AdminController extends Controller
         $comentarios = [];
         $sinEstado = [];
         foreach ($operarios as $key => $op ) {
-            $names[] = $op->name;
+            
             $nas[] = \App\Dato::where([['user_id',$op->id],['case','na']])->whereDate( 'updated_at',$hoy)->count();
             $nis[] = \App\Dato::where([['user_id',$op->id],['case','ni']])->whereDate( 'updated_at',$hoy)->count();
             $posibles[] = \App\Dato::where([['user_id',$op->id],['case','posible']])->whereDate( 'updated_at',$hoy)->count();
@@ -76,7 +78,7 @@ class AdminController extends Controller
             $otros = \App\Dato::where([['user_id',$op->id],['case',null]])->whereDate( 'updated_at',$hoy)->get();
             $cantComent = 0;
             $sinUso = 0;
-            foreach ($otros as $key => $otr) {
+            foreach ($otros as $otr) {
                 if (count($otr->comentarios) != 0) {
                     $cantComent++;
                 }else{
@@ -85,41 +87,47 @@ class AdminController extends Controller
             }
             $comentarios[]= $cantComent;
             $sinEstado[] = $sinUso;
+
+            $names[] = $op->name."(".(\App\Dato::where('user_id',$op->id)->whereDate( 'updated_at',$hoy)->count()).")";
         }
 
         $OpChart = (new LarapexChart)->setTitle('Datos por operadora')
-        ->setType('bar')
-        ->setXAxis($names)
-        ->setGrid(true)
-        ->setDataset([
-            [
-                'name'  => 'No atiende',
-                'data'  =>  $nas
-            ],
-            [
-                'name'  => 'No interesado',
-                'data'  => $nis
-            ],
-            [
-                'name'  => 'Posibles',
-                'data'  => $posibles
-            ],
-            [
-                'name'  => 'Vendidos',
-                'data'  => $vendidos
-            ],
-            [
-                'name'  => 'Con comentario',
-                'data'  => $comentarios
-            ],
-            [
-                'name'  => 'Sin uso',
-                'data'  => $sinEstado
-            ]
-        ])
-        ->setStroke(1);
+                                        ->setType('bar')
+                                        ->setXAxis($names)
+                                        ->setGrid(true)
+                                        ->setDataset([
+                                            [
+                                                'name'  => 'No atiende',
+                                                'data'  =>  $nas
+                                            ],
+                                            [
+                                                'name'  => 'No interesado',
+                                                'data'  => $nis
+                                            ],
+                                            [
+                                                'name'  => 'Posibles',
+                                                'data'  => $posibles
+                                            ],
+                                            [
+                                                'name'  => 'Vendidos',
+                                                'data'  => $vendidos
+                                            ],
+                                            [
+                                                'name'  => 'Con comentario',
+                                                'data'  => $comentarios
+                                            ],
+                                            [
+                                                'name'  => 'Sin uso',
+                                                'data'  => $sinEstado
+                                            ]
+                                        ]);
 
-        return view('admin.index', ['operarios' => $operarios, 'chart' => $chart, 'OpChart' => $OpChart]);
+        return view('admin.index', [
+                                    'operarios' => $operarios,
+                                    'notas' => $notas, 
+                                    'chart' => $chart, 
+                                    'OpChart' => $OpChart
+                                    ]);
     }
 
 }

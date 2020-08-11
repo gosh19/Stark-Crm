@@ -14,6 +14,7 @@ class DatosList extends Component
     public $operarios;
     public $order = 'desc';
     public $horario = '10:00hs_a_12:00hs';
+    public $disabled = 'disabled';
 
     public function mount($datos)
     {
@@ -48,6 +49,8 @@ class DatosList extends Component
             $aux[$dato['id']] = $dato;
         }
         $this->selec = $aux;
+
+        $this->disabled = count($this->selec) != 0 ? '':'disabled';
 
     }
 

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Comentario;
+use App\Nota;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ComentarioController extends Controller
+class NotaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,10 @@ class ComentarioController extends Controller
      */
     public function index()
     {
-        //
+        $notasOp = Nota::where('receiver',Auth::user()->id)->latest()->get();
+        $notasGen = Nota::where('receiver', null)->latest()->get();
+
+        return view('notas.index',['notasOp'=> $notasOp, 'notasGen'=> $notasGen]);
     }
 
     /**
@@ -36,35 +39,24 @@ class ComentarioController extends Controller
      */
     public function store(Request $request)
     {
-        $comentario = new Comentario;
+        $nota = new Nota;
 
-        $comentario->comentario = $request->comentario;
-        $comentario->user_id = Auth::user()->id;
-        $comentario->dato_id = $request->dato_id;
+        $nota->sender = Auth::user()->id;
+        $nota->receiver = $request->id;
+        $nota->asunto = $request->asunto;
+        $nota->mensaje = $request->mensaje;
+        $nota->save();
 
-        $comentario->save();
-
-        $dato = \App\Dato::find($request->dato_id);
-        if (Auth::user()->rol == 'admin') {
-            $dato->case = 'destacado';
-            $dato->save();
-        }else{
-            $dato->case = null;
-            $dato->name = $dato->name.".";
-            $dato->save();
-        }
-
-        return redirect()->back()->with('msg','Comentario cargado');
-        
+        return redirect()->back()->with('msg', 'Nota cargada con exito');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Comentario  $comentario
+     * @param  \App\Nota  $nota
      * @return \Illuminate\Http\Response
      */
-    public function show(Comentario $comentario)
+    public function show(Nota $nota)
     {
         //
     }
@@ -72,10 +64,10 @@ class ComentarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Comentario  $comentario
+     * @param  \App\Nota  $nota
      * @return \Illuminate\Http\Response
      */
-    public function edit(Comentario $comentario)
+    public function edit(Nota $nota)
     {
         //
     }
@@ -84,10 +76,10 @@ class ComentarioController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Comentario  $comentario
+     * @param  \App\Nota  $nota
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comentario $comentario)
+    public function update(Request $request, Nota $nota)
     {
         //
     }
@@ -95,11 +87,21 @@ class ComentarioController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Comentario  $comentario
+     * @param  \App\Nota  $nota
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comentario $comentario)
+    public function delete(Nota $Nota)
     {
-        //
+        $Nota->delete();
+
+        return redirect()->back()->with('msg','Nota eliminada correctamente');
+    }
+
+    public function modificarVisto(Nota $Nota)
+    {
+        $Nota->visto = 1;
+        $Nota->save();
+
+        return redirect()->back();
     }
 }

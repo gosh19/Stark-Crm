@@ -16,7 +16,7 @@ class Operario extends Model
 
     public function datosNuevos()
     {
-        $datos = \App\Dato::where([['user_id',$this->id],['case',null]])->orderBy('updated_at')->get();
+        $datos = \App\Dato::where([['user_id',$this->id],['case',null]])->orderBy('updated_at','desc')->get();
 
         foreach ($datos as $key => $dato) {
             if ($dato->agenda != null) {
@@ -110,4 +110,8 @@ class Operario extends Model
         return \App\Operario::where('rol','operario')->get();
     }
     
+    public function notas()
+    {
+        return $this->hasMany('App\Nota', 'receiver', 'id');
+    }
 }

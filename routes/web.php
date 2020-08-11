@@ -36,4 +36,8 @@ Route::group(['middleware' => ['operario']], function () {
 
     Route::any('/operario-putCase/{Dato}', 'OperarioController@putCase')->name('Operario.putCase');
     Route::post('/operario-re-agendar', 'OperarioController@reAgendar')->name('Operario.reAgendar');
+
+    Route::resource('Nota', 'NotaController');
+    Route::get('/Nota/{Nota}/Visto', 'NotaController@modificarVisto')->name('Nota.modVisto');
+    Route::get('/Nota/{Nota}/Delete', 'NotaController@delete')->name('Nota.delete');
 });

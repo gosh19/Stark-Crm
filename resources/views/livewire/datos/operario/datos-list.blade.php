@@ -29,7 +29,6 @@
             </tr>
         </thead>
         <tbody>
-            {{$destacados}}
             @foreach ($destacados as $key => $dato)
                 <tr id="row-dato-{{$dato->id}}" 
                     class="

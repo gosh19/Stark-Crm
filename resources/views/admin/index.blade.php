@@ -28,6 +28,9 @@
                         Caja principal
                     </div>
                     <div class="card-body">
+                        <div class="mb-3">
+                            @include('admin.notas',['operarios' => $operarios, 'notas' => $notas])
+                        </div>
                         @livewire('admin.buscador',['operarios'=> $operarios])
                     </div>
                 </div>

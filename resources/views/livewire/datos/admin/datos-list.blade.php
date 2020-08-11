@@ -6,10 +6,10 @@
                     {{count($datos) > 10? 'p-2 alert alert-primary':'p-2 alert alert-danger'}} "
             >Quedan {{count($datos)}} dato(s)</h4>
     </div>
-    @if (count($selec) != 0)
+    @if (count($selec) != 0 || true)
     <div class="d-flex justify-content-between m-3">
-        <div>
-            <div class="input-group">
+        <div class="row p-2 border rounded">
+            <div class="input-group col-3">
                 <div class="input-group-prepend mr-3">
                   <div class="input-group-text">
                     <input type="radio" name="horario" wire:click="setHorario('10:00hs_a_12:00hs')" checked>
@@ -17,7 +17,7 @@
                 </div>
                 <label for="">10:00hs_a_12:00hs</label>
             </div>
-            <div class="input-group">
+            <div class="input-group col-3">
                 <div class="input-group-prepend mr-3">
                   <div class="input-group-text">
                     <input type="radio" name="horario" wire:click="setHorario('12:00hs_a_14:00hs')">
@@ -25,7 +25,7 @@
                 </div>
                 <label for="">12:00hs_a_14:00hs</label>
             </div>
-            <div class="input-group">
+            <div class="input-group col-3">
                 <div class="input-group-prepend mr-3">
                   <div class="input-group-text">
                     <input type="radio" name="horario" wire:click="setHorario('14:00hs_a_16:00hs')">
@@ -33,7 +33,7 @@
                 </div>
                 <label for="">14:00hs_a_16:00hs</label>
             </div>
-            <div class="input-group">
+            <div class="input-group col-3">
                 <div class="input-group-prepend mr-3">
                   <div class="input-group-text">
                     <input type="radio" name="horario" wire:click="setHorario('16:00hs_a_18:00hs')">
@@ -41,11 +41,12 @@
                 </div>
                 <label for="">16:00hs_a_18:00hs</label>
             </div>
-            <button wire:click="modificarHorario" class="btn btn-warning mb-3" >Modificar</button>
+            <button wire:click="modificarHorario" {{$disabled}} class="btn btn-warning btn-block m-3" >Modificar</button>
         </div>
         <button wire:click="delete" 
                 data-toggle="tooltip" 
                 data-placement="left" 
+                {{$disabled}}
                 title="EL DATO SE ELIMINARA DE LA BASE!!" 
                 class="btn btn-danger mb-3 mr-3" 
         >Eliminar</button>

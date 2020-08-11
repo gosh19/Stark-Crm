@@ -13,8 +13,9 @@ class OperarioController extends Controller
     public function index()
     {
         $operario = \App\Operario::find(Auth::user()->id);
+        $notas = \App\Nota::where('receiver', null)->take(2)->latest()->get();
 
-        return view('operario.index',['operario' => $operario]);
+        return view('operario.index',['operario' => $operario, 'notas'=> $notas]);
     }
 
     public function putCase(\App\Dato $Dato, Request $request)
