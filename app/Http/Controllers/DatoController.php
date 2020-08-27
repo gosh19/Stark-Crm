@@ -70,7 +70,7 @@ class DatoController extends Controller
         if ($col != null) {
             $datos = Dato::where('case','!=',null)->orderBy($col,$order)->take(300)->get();
         }else{
-            $datos = Dato::where('case','!=',null)->orderBy('updated_at',$order)->take(300)->get();
+            $datos = Dato::where('case','!=',null)->orderBy('updated_at',$order)->take(1000)->get();
         }
         $operarios = \App\Operario::where('rol','operario')->get();
 
