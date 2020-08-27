@@ -68,7 +68,7 @@ class DatoController extends Controller
     public function verUsados($col = null,$order = 'desc')
     {
         if ($col != null) {
-            $datos = Dato::where('case','!=',null)->orderBy($col,$order)->take(300)->get();
+            $datos = Dato::where('case','!=',null)->orderBy($col,$order)->take(1000)->get();
         }else{
             $datos = Dato::where('case','!=',null)->orderBy('updated_at',$order)->take(1000)->get();
         }
