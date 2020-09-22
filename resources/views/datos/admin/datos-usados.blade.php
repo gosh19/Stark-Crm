@@ -89,7 +89,7 @@
                         <td>{{$dato->hora_contacto}}</td>
                         <td>{{date_format($dato->updated_at, 'd-m-Y H:i')}}</td>
                         <td>{{$dato->case}}</td>
-                        <td>{{$dato->user->name}}</td>
+                        <td>{{$dato->user->name ?? 'null'}}</td>
                         <td>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
