@@ -90,6 +90,9 @@ class DatoController extends Controller
             $d->user_id = $request->id;
             $d->case = NULL;
             $d->save();
+            foreach ($d->comentarios as $i => $comment) {
+                $comment->delete();
+            }
             $cant++;
         }
 
