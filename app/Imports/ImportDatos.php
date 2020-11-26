@@ -29,6 +29,8 @@ class ImportDatos implements ToModel,WithHeadingRow
                 if (isset($row['full_name'])) {
                     # code...
                     $row['nombre_completo'] = $row['full_name'];
+                }else if(isset($row['nombre_y_apellidos'])){
+                    $row['nombre_completo'] = $row['nombre_y_apellidos'];
                 }else{
                     $row['nombre_completo'] = 'sin informacion';
                 }
@@ -37,7 +39,7 @@ class ImportDatos implements ToModel,WithHeadingRow
                 if (isset($row['email'])) {
                     $row['correo_electronico'] = $row['email'];
                 }else{
-                    $row['nombre_completo'] = 'sin informacion';
+                    $row['correo_electronico'] = 'sin informacion';
                 }
             }
             if (!isset($row['numero_de_telefono'])) {
