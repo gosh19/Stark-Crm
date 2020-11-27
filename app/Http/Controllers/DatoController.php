@@ -65,13 +65,12 @@ class DatoController extends Controller
         return \redirect()->back()->with('msg', 'Dato cargado correctamente');
     }
 
-    public function verUsados(Request $request,$col = null,$order = 'desc')
+    public function verUsados(Request $request, $col = null, $order = 'desc')
     {
         if (isset($request->form)) {
             $datos = Dato::where('case',$request->case)
                         ->whereBetween('updated_at', [$request->desde, $request->hasta])
                         ->get();
-            //return $datos;
 
         }else{
 
