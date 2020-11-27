@@ -65,15 +65,24 @@ class DatoController extends Controller
         return \redirect()->back()->with('msg', 'Dato cargado correctamente');
     }
 
-    public function verUsados($col = null,$order = 'desc')
+    public function verUsados(Request $request,$col = null,$order = 'desc')
     {
-        if ($col != null) {
-            $datos = Dato::where('case','!=',null)->orderBy($col,$order)->take(1000)->get();
+        if (isset($request->form)) {
+            $datos = Dato::where('case',$request->case)
+                        ->whereBetween('updated_at', [$request->desde, $request->hasta])
+                        ->get();
+            //return $datos;
+
         }else{
-            $datos = Dato::where('case','!=',null)->orderBy('updated_at',$order)->take(1000)->get();
+
+            if ($col != null) {
+                $datos = Dato::where('case','!=',null)->orderBy($col,$order)->take(1000)->get();
+            }else{
+                $datos = Dato::where('case','!=',null)->orderBy('updated_at',$order)->take(1000)->get();
+            }
+            
         }
         $operarios = \App\Operario::where('rol','operario')->get();
-
         $order = $order == 'desc' ? 'asc':'desc';
         return view('datos.admin.datos-usados',['datos'=> $datos,'order' => $order,'operarios' => $operarios]);
         

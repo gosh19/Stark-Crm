@@ -9,6 +9,31 @@
         estado no se veran aqui hasta que se les asigne un estado.
     </p>
 </div>
+<div>
+    <div class="row justify-content-center">
+
+    
+        <form action="{{route('Dato.usados')}}" method="GET">
+            <input type="hidden" name="form" value="on">
+            <select name="case">
+                <option value="na">No atiende</option>
+                <option value="ni">No interesado</option>
+                <option value="vendido">Vendido</option>
+                <option value="posible">Posible</option>
+            </select>
+
+            <select name="operadora">
+                <option value="">Elija una operadora</option>
+                @foreach ($operarios as $op)
+                    <option value="{{$op->id}}">{{$op->name}}</option>
+                @endforeach
+            </select>
+            <input type="date" name="desde" id="" required>
+            <input type="date" name="hasta" id="" required>
+            <input type="submit" value="Cargar">
+        </form>
+    </div>
+</div>
     <table class="table table-hover w-100">
         <thead>
             <tr>
