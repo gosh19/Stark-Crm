@@ -70,6 +70,7 @@ class DatoController extends Controller
         if (isset($request->form)) {
             $datos = Dato::where('case',$request->case)
                         ->whereBetween('updated_at', [$request->desde, $request->hasta])
+                        ->orderBy('updated_at','desc')
                         ->get();
 
         }else{
