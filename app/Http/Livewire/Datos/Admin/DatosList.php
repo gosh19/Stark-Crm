@@ -16,11 +16,18 @@ class DatosList extends Component
     public $horario = '10:00hs_a_12:00hs';
     public $disabled = 'disabled';
 
+    public $case = null;
+    public $fechaDesde = null;
+    public $fechaHasta = null;
+
+
     public function mount($datos)
     {
         $this->datos = $datos;
         $this->selec = array();
         $this->operarios = \App\Operario::getAll();
+        $this->fechaDesde=date_format(\Carbon\Carbon::yesterday(),'Y-m-d');
+        $this->fechaHasta=date_format(\Carbon\Carbon::now(),'Y-m-d');
     }
 
     public function sortBy($col)
@@ -30,6 +37,15 @@ class DatosList extends Component
         $this->datos = $datos;
         $this->debug = $this->order;
         $this->order = $this->order == 'desc' ? 'asc':'desc';
+    }
+
+    public function searchData()
+    {
+        $datos = \App\Dato::where('case',$this->case)
+                            ->whereBetween('updated_at',[$this->fechaDesde,$this->fechaHasta])
+                            ->get();
+
+        $this->datos = $datos;
     }
 
     public function submit($dato)
@@ -85,7 +101,11 @@ class DatosList extends Component
         foreach ($this->selec as $key => $s) {
             $auxDato = \App\Dato::find($s['id']);
             $auxDato->user_id = $id;
+            $auxDato->case = null;
             $auxDato->save();
+            foreach ($auxDato->comentarios as $i => $comment) {
+                $comment->delete();
+            }
             
             foreach ($this->datos as $key => $d) {
                 if ($d['id'] == $s['id']) {
@@ -98,19 +118,18 @@ class DatosList extends Component
 
     public function delete()
     {
-            # code...
         
-            foreach ($this->selec as $i => $s) {
-                $auxDato = \App\Dato::find($s['id']);
-                $auxDato->delete();
+        foreach ($this->selec as $i => $s) {
+            $auxDato = \App\Dato::find($s['id']);
+            $auxDato->delete();
 
-                foreach ($this->datos as $key => $d) {
-                    if ($d['id'] == $s['id']) {
-                        unset($this->datos[$key]);
-                    }
+            foreach ($this->datos as $key => $d) {
+                if ($d['id'] == $s['id']) {
+                    unset($this->datos[$key]);
                 }
-                unset($this->selec[$i]);
             }
+            unset($this->selec[$i]);
+        }
     }
 
     public function render()

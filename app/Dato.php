@@ -12,6 +12,7 @@ class Dato extends Model
         'telefono',
         'pedido',
         'hora_contacto',
+        'platform',
     ];
 
     public function user()
@@ -27,5 +28,10 @@ class Dato extends Model
     public function agenda()
     {
         return $this->hasOne('App\Agenda');
+    }
+
+    public function historial()
+    {
+        return $this->hasMany('App\HistoriaDato');
     }
 }

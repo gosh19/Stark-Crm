@@ -49,6 +49,12 @@ class DatosList extends Component
 
     public function putCase($key)
     {
+        \App\HistoriaDato::create([
+            'dato_id'=>$this->datos[$key]->id,
+            'user_id'=>Auth::id(),
+            'case'=>$this->case,
+        ]);
+        
         if ($this->case == 'cambio_turno') {
             $this->datos[$key]->hora_contacto = $this->case;
             $this->datos[$key]->case = null;

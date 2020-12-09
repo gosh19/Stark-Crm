@@ -64,6 +64,7 @@ class ImportDatos implements ToModel,WithHeadingRow
                         'name'     => preg_replace('/[\x00-\x1F\x7F]/', '',str_replace(array('"'), '', $row['nombre_completo']) ),
                         'pedido'        => preg_replace('/[\x00-\x1F\x7F]/', '', str_replace(array('"'), '', $row['campaign_name'])), 
                         'hora_contacto'  =>preg_replace('/[\x00-\x1F\x7F]/', '',  $row['horario_de_contacto']),
+                        'platform'  =>preg_replace('/[\x00-\x1F\x7F]/', '',  $row['platform']),
                         'email'    => preg_replace('/[\x00-\x1F\x7F]/', '', $row['correo_electronico']), 
                         'telefono'     =>preg_replace('/[\x00-\x1F\x7F]/', '',  $row['numero_de_telefono']),
                     ]);

@@ -1,4 +1,11 @@
 <div>
+  <div x-data="{open: false}" class="fixed w-100 z-30">
+    <div x-show="open" class="absolute w-100  bg-black bg-opacity-40 py-5">
+      <div class="bg-red-600 w-1/2 mx-auto py-3">
+        asdasdasdasdas
+      </div>
+    </div>
+  </div>
     <div class="d-flex justify-content-between">
 
         <h4 class="{{count($selec) == 0? 'p-2 alert alert-danger':'p-2 alert alert-info'}}">{{count($selec)}} dato(s) seleccionados</h4>
@@ -6,6 +13,7 @@
                     {{count($datos) > 10? 'p-2 alert alert-primary':'p-2 alert alert-danger'}} "
             >Quedan {{count($datos)}} dato(s)</h4>
     </div>
+    
     @if (count($selec) != 0 || true)
     <div class="d-flex justify-content-between m-3">
         <div class="row p-2 border rounded">
@@ -58,17 +66,45 @@
             <button class="btn btn-primary" wire:click="pasarDatos({{$op->id}})">{{$op->name}}</button>
         @endforeach
     </div>
+    <div>
+      <p class="text-blue-600 text-xl font-bold">Filtro <i class="fas fa-filter"></i></p>
+      <div class="border border-blue-300 p-3 flex justify-content-between">
+        <div>
+          <label for="">Estado : </label>
+          <select class="border-2 border-blue-400" wire:model="case">
+            <option value="{{null}}">Sin estado</option>
+            <option value="na">No antiende</option>
+            <option value="ni">No interesado</option>
+            <option value="posible">Posible</option>
+          </select>
+        </div>
+        <div>
+          <label for="">Desde : </label>
+          <input class="p-1 border-blue-400 border-2 " type="date" wire:model="fechaDesde">
+        </div>
+        <div>
+          <label for="">Hasta : </label>
+          <input class="p-1 border-blue-400 border-2 " type="date" wire:model="fechaHasta">
+        </div>
+        <div>
+          <button class="py-1 px-5 rounded bg-blue-500 text-white" wire:click="searchData()">
+            Filtrar
+          </button>
+        </div>
+      </div>
+    </div>
 
     <table class="table table-hover">
         <thead>
             <tr style="cursor: pointer">
-                <th><button class="btn btn-info" wire:click="sortBy('id')">Id</button> </th>
                 <th><button class="btn btn-info" wire:click="sortBy('pedido')">Curso</button> </th>
+                <th><button class="btn btn-info" >Origen</button></th>
                 <th><button class="btn btn-info" wire:click="sortBy('name')">Nombre</button> </th>
-                <th><button class="btn btn-info" wire:click="sortBy('email')">E-mail</button> </th>
-                <th><button class="btn btn-info" wire:click="sortBy('telefono')">Telefono</button> </th>
                 <th><button class="btn btn-info" wire:click="sortBy('hora_contacto')">Horario</button> </th>
+                <th><button class="btn btn-info" >Usos</button></th>
                 <th><button class="btn btn-info" wire:click="sortBy('updated_at')">Fecha dato</button></th>
+                <th><button class="btn btn-info" >Operario</button></th>
+                <th><button class="btn btn-info" >Action</button></th>
             </tr>
         </thead>
         <tbody>
@@ -79,13 +115,14 @@
                     wire:click="submit({{$dato}})"
                     class="{{(isset($selec[$dato->id])) ? 'bg-success':''}}"
                     >
-                    <td scope="row">{{$dato->id}}</td>
                     <td>{{$dato->pedido}}</td>
+                    <td>{{$dato->platform}}</td>
                     <td>{{$dato->name}}</td>
-                    <td>{{$dato->email}}</td>
-                    <td>{{$dato->telefono}}</td>
                     <td>{{$dato->hora_contacto}}</td>
+                    <td>{{count($dato->historial)}}</td>
                     <td>{{date_format($dato->updated_at, 'd-m-Y H:i')}}</td>
+                    <td>{{$dato->user_id == null ? 'Sin asignar':$dato->user->name}}</td>
+                    <td><button class="py-1 px-2 bg-green-400">Ver detalle</button></td>
                 </tr>
             @endforeach
         </tbody>
