@@ -2,7 +2,7 @@
   <div x-data="{open: false}" class="fixed w-100 z-30">
     <div x-show="open" class="absolute w-100  bg-black bg-opacity-40 py-5">
       <div class="bg-red-600 w-1/2 mx-auto py-3">
-        asdasdasdasdas
+        
       </div>
     </div>
   </div>
@@ -100,6 +100,7 @@
                 <th><button class="btn btn-info" wire:click="sortBy('pedido')">Curso</button> </th>
                 <th><button class="btn btn-info" >Origen</button></th>
                 <th><button class="btn btn-info" wire:click="sortBy('name')">Nombre</button> </th>
+                <th><button class="btn btn-info" >Telefono</button> </th>
                 <th><button class="btn btn-info" wire:click="sortBy('hora_contacto')">Horario</button> </th>
                 <th><button class="btn btn-info" >Usos</button></th>
                 <th><button class="btn btn-info" wire:click="sortBy('updated_at')">Fecha dato</button></th>
@@ -118,6 +119,7 @@
                     <td>{{$dato->pedido}}</td>
                     <td>{{$dato->platform}}</td>
                     <td>{{$dato->name}}</td>
+                    <td>{{$dato->telefono}}</td>
                     <td>{{$dato->hora_contacto}}</td>
                     <td>{{count($dato->historial)}}</td>
                     <td>{{date_format($dato->updated_at, 'd-m-Y H:i')}}</td>
