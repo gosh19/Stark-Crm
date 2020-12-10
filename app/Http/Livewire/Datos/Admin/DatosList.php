@@ -20,6 +20,11 @@ class DatosList extends Component
     public $fechaDesde = null;
     public $fechaHasta = null;
 
+    public $selected = null;
+    public $openSelected = false;
+
+    public $selectedName ='';
+
 
     public function mount($datos)
     {
@@ -46,6 +51,13 @@ class DatosList extends Component
                             ->get();
 
         $this->datos = $datos;
+    }
+
+    public function setSelected($id)
+    {
+        $this->openSelected=true;
+        $this->selected = \App\Dato::find($id);
+        //$this->selectedName = ['name'=>$this->selected->name];
     }
 
     public function submit($dato)
@@ -88,9 +100,7 @@ class DatosList extends Component
                 }
             }
         }
-        $datos = \App\Dato::where('user_id',null)->orderBy('id','desc')->get();
-
-        $this->datos = $datos;
+        $this->searchData();
 
         $this->selec = [];
     }
@@ -103,6 +113,10 @@ class DatosList extends Component
             $auxDato->user_id = $id;
             $auxDato->case = null;
             $auxDato->save();
+
+            if ($auxDato->agenda != null) {
+                $auxDato->agenda->delete();
+            }
             foreach ($auxDato->comentarios as $i => $comment) {
                 $comment->delete();
             }

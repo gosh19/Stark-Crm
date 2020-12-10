@@ -1,11 +1,26 @@
 <div>
-  <div x-data="{open: false}" class="fixed w-100 z-30">
-    <div x-show="open" class="absolute w-100  bg-black bg-opacity-40 py-5">
-      <div class="bg-red-600 w-1/2 mx-auto py-3">
-        
+  <div x-data="modals()" class="fixed w-100 z-30">
+    <div x-show="openSelected" class="absolute w-100  bg-black bg-opacity-40 p-5">
+      <div @click.away="openSelected=false" class="bg-white w-1/2 mx-auto p-3 shadow-2xl">
+        <div>
+          @if ($selected != null)
+            <p>{{$selected->name}}</p>
+            <p>{{$selected->telefono}}</p>  
+            <p>{{$selected->email}}</p>
+          @endif
+        </div>
+
       </div>
     </div>
+    
   </div>
+  <script>
+    function modals() {
+      return{
+        openSelected: @entangle('openSelected'),
+      }
+    }
+  </script>
     <div class="d-flex justify-content-between">
 
         <h4 class="{{count($selec) == 0? 'p-2 alert alert-danger':'p-2 alert alert-info'}}">{{count($selec)}} dato(s) seleccionados</h4>
@@ -124,7 +139,7 @@
                     <td>{{count($dato->historial)}}</td>
                     <td>{{date_format($dato->updated_at, 'd-m-Y H:i')}}</td>
                     <td>{{$dato->user_id == null ? 'Sin asignar':$dato->user->name}}</td>
-                    <td><button class="py-1 px-2 bg-green-400">Ver detalle</button></td>
+                    <td><button class="py-1 px-2 bg-green-400" wire:click="setSelected({{$dato->id}})" >Ver detalle</button></td>
                 </tr>
             @endforeach
         </tbody>
