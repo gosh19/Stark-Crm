@@ -22,7 +22,12 @@ class Dato extends Model
 
     public function comentarios()
     {
-        return $this->hasMany('App\Comentario')->orderBy('id','desc')->take(5);
+        return $this->hasMany('App\Comentario')->orderBy('id','desc')->where('open',true)->take(5);
+    }
+
+    public function allComments()
+    {
+        return $this->hasMany('App\Comentario');
     }
 
     public function agenda()

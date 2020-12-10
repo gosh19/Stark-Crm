@@ -1,12 +1,53 @@
 <div>
   <div x-data="modals()" class="fixed w-100 z-30">
     <div x-show="openSelected" class="absolute w-100  bg-black bg-opacity-40 p-5">
-      <div @click.away="openSelected=false" class="bg-white w-1/2 mx-auto p-3 shadow-2xl">
+      <div @click.away="openSelected=false" class="bg-white w-3/4 mx-auto p-3 shadow-2xl">
         <div>
           @if ($selected != null)
-            <p>{{$selected->name}}</p>
-            <p>{{$selected->telefono}}</p>  
-            <p>{{$selected->email}}</p>
+            <div class="mb-3">
+
+              <p>{{$selected->name}}</p>
+              <p>{{$selected->telefono}}</p>  
+              <p>{{$selected->email}}</p>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+
+              <div class="col-span-1">
+
+                <p class="text-lg text-blue-600 font-bold">Historial</p>
+                <table class="table table-striped p-2">
+                  <thead>
+                    <th scope="row">Estado</th>
+                    <th scope="row">Vendedora</th>
+                    <th scope="row">Fecha</th>
+                  </thead>
+                  <tbody>
+                    @foreach ($selected->historial as $historial)
+                        <td>{{$historial->case}}</td>
+                        <td>{{$historial->user->name}}</td>
+                        <td>{{date_format($historial->created_at,'d-m-Y')}}</td>
+                    @endforeach  
+                  </tbody>  
+                </table>
+              </div>
+              <div class="col-span-1">
+                <p class="text-lg text-red-600 font-bold">Comentarios</p>
+                <table class="table table-striped p-2">
+                  <thead>
+                    <th scope="row">Comentario</th>
+                    <th scope="row">Vendedora</th>
+                    <th scope="row">Fecha</th>
+                  </thead>
+                  <tbody>
+                    @foreach ($selected->allComments as $comment)
+                        <td>{{$comment->comentario}}</td>
+                        <td>{{$comment->user->name}}</td>
+                        <td>{{date_format($comment->created_at,'d-m-Y')}}</td>
+                    @endforeach  
+                  </tbody>  
+                </table>
+              </div>
+            </div>
           @endif
         </div>
 

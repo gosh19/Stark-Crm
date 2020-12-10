@@ -118,7 +118,8 @@ class DatosList extends Component
                 $auxDato->agenda->delete();
             }
             foreach ($auxDato->comentarios as $i => $comment) {
-                $comment->delete();
+                $comment->open = false;
+                $comment->save();
             }
             
             foreach ($this->datos as $key => $d) {

@@ -93,6 +93,44 @@
                                     <p>{{$item->email}}</p>
                                     <p>{{$item->pedido}}</p>
                                     <p>{{$item->hora_contacto}}</p>
+                                    <div class="grid grid-rows-flow gap-4">
+
+                                      <div class="row-span-1">
+                        
+                                        <p class="text-lg text-blue-600 font-bold">Historial</p>
+                                        <table class="table table-striped p-2">
+                                          <thead>
+                                            <th scope="row">Estado</th>
+                                            <th scope="row">Vendedora</th>
+                                            <th scope="row">Fecha</th>
+                                          </thead>
+                                          <tbody>
+                                            @foreach ($item->historial as $historial)
+                                                <td>{{$historial->case}}</td>
+                                                <td>{{$historial->user->name}}</td>
+                                                <td>{{date_format($historial->created_at,'d-m-Y')}}</td>
+                                            @endforeach  
+                                          </tbody>  
+                                        </table>
+                                      </div>
+                                      <div class="row-span-1">
+                                        <p class="text-lg text-red-600 font-bold">Comentarios</p>
+                                        <table class="table table-striped p-2">
+                                          <thead>
+                                            <th scope="row">Comentario</th>
+                                            <th scope="row">Vendedora</th>
+                                            <th scope="row">Fecha</th>
+                                          </thead>
+                                          <tbody>
+                                            @foreach ($item->allComments as $comment)
+                                                <td>{{$comment->comentario}}</td>
+                                                <td>{{$comment->user->name}}</td>
+                                                <td>{{date_format($comment->created_at,'d-m-Y')}}</td>
+                                            @endforeach  
+                                          </tbody>  
+                                        </table>
+                                      </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
                                     <p>{{($item->user_id == null)? 'No pertenece a nadie aun':'Pertenece a '.$item->user->name }}</p>
