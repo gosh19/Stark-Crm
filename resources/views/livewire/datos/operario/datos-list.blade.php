@@ -125,9 +125,9 @@
                         </div>
                         <div class="collapse mt-3 {{$stateCollapse[$key] ?? null}} " id="agenda-collapse-{{$dato->id}}">
                             <div class="card">
-                                <div class="card-body">
-                                    <input class="mb-3" type="datetime-local" wire:model="fecha" >
-                                    <input class="mb-3" type="text" wire:model.lazy="anotacion" placeholder="Detalle..." >
+                                <div class="card-body text-black">
+                                    <input class="mb-3  p-1 border-2 border-blue-400" type="datetime-local" wire:model="fecha" >
+                                    <input class="mb-3  p-1 border-2 border-blue-400" type="text" wire:model.lazy="anotacion" placeholder="Detalle..." >
                                     <button wire:click="agendarDato({{$key}})" class="btn btn-success">Agendar</button>
                                 </div>
                             </div>
