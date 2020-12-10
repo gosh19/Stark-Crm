@@ -40,9 +40,12 @@
                   </thead>
                   <tbody>
                     @foreach ($selected->allComments as $comment)
+                      <tr>
+
                         <td>{{$comment->comentario}}</td>
                         <td>{{$comment->user->name}}</td>
                         <td>{{date_format($comment->created_at,'d-m-Y')}}</td>
+                      </tr>
                     @endforeach  
                   </tbody>  
                 </table>
