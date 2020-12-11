@@ -43,7 +43,6 @@
                     <td>
                         <ul class="list-group text-dark border border-dark">
                             <li class="list-group-item">{{$dato->email}}</li>
-                            <li class="list-group-item">{{$dato->hora_contacto}}</li>
                             @if ($dato->agenda != null)
                                 
                                 <li class="list-group-item">
@@ -101,7 +100,6 @@
                     <td>
                         <ul class="list-group text-dark border border-dark">
                             <li class="list-group-item">{{$dato->email}}</li>
-                            <li class="list-group-item">{{$dato->hora_contacto}}</li>
                         </ul>
                     </td>
                     <td style="width: 300px" class="pr-1">@livewire('datos.operario.comentario',['dato'=> $dato], key($dato->id))</td>

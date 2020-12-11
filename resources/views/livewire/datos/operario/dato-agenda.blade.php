@@ -46,7 +46,6 @@
                                     <li class="list-group-item" >{{$data->name}}</li>
                                     <li class="list-group-item" >{{$data->telefono}}</li>
                                     <li class="list-group-item" >{{$data->email}}</li>
-                                    <li class="list-group-item" >{{$data->hora_contacto}}</li>
                                     <li class="list-group-item" >{{$data->pedido}}</li>
                                 </ul>
                                 <hr>
