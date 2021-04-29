@@ -52,6 +52,8 @@ class ImportDatos implements ToModel,WithHeadingRow
             if (!isset($row['horario_de_contacto'])) {
                 if (isset($row['en_que_horario_estas_disponible'])) {
                     $row['horario_de_contacto'] = $row['en_que_horario_estas_disponible'];
+                }if (isset($row['¿en_que_horario_podemos_contactarte?'])) {
+                    $row['horario_de_contacto'] = $row['¿en_que_horario_podemos_contactarte?'];
                 }else{
                     $row['horario_de_contacto'] = 'sin informacion';
                 }
