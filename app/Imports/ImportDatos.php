@@ -25,6 +25,8 @@ class ImportDatos implements ToModel,WithHeadingRow
                             ->orWhere('telefono',preg_replace('/[\x00-\x1F\x7F]/', '', $row['numero_de_telefono'] ??$row['phone_number'] ?? 1))
                             ->first();
 
+            
+
             if (!isset($row['nombre_completo'])) {
                 if (isset($row['full_name'])) {
                     # code...
@@ -35,6 +37,7 @@ class ImportDatos implements ToModel,WithHeadingRow
                     $row['nombre_completo'] = 'sin informacion';
                 }
             }
+            
             if (!isset($row['correo_electronico'])) {
                 if (isset($row['email'])) {
                     $row['correo_electronico'] = $row['email'];
@@ -52,8 +55,8 @@ class ImportDatos implements ToModel,WithHeadingRow
             if (!isset($row['horario_de_contacto'])) {
                 if (isset($row['en_que_horario_estas_disponible'])) {
                     $row['horario_de_contacto'] = $row['en_que_horario_estas_disponible'];
-                }else if (isset($row['¿en_que_horario_podemos_contactarte?'])) {
-                    $row['horario_de_contacto'] = $row['¿en_que_horario_podemos_contactarte?'];
+                }else if (isset($row['en_que_horario_podemos_contactarte'])) {
+                    $row['horario_de_contacto'] = $row['en_que_horario_podemos_contactarte'];
                 }else{
                     $row['horario_de_contacto'] = 'sin informacion';
                 }
@@ -62,14 +65,19 @@ class ImportDatos implements ToModel,WithHeadingRow
             if ($dato == null) {
                 if ($row['nombre_completo'] != null) {
                     session()->flash('datosNuevos' , session('datosNuevos')+1);
-                    return new Dato([
-                        'name'     => preg_replace('/[\x00-\x1F\x7F]/', '',str_replace(array('"'), '', $row['nombre_completo']) ),
-                        'pedido'        => preg_replace('/[\x00-\x1F\x7F]/', '', str_replace(array('"'), '', $row['campaign_name'])), 
-                        'hora_contacto'  =>preg_replace('/[\x00-\x1F\x7F]/', '',  $row['horario_de_contacto']),
-                        'platform'  =>preg_replace('/[\x00-\x1F\x7F]/', '',  $row['platform']),
-                        'email'    => preg_replace('/[\x00-\x1F\x7F]/', '', $row['correo_electronico']), 
-                        'telefono'     =>preg_replace('/[\x00-\x1F\x7F]/', '',  $row['numero_de_telefono']),
-                    ]);
+                    try {
+                        return new Dato([
+                            'name'     => preg_replace('/[\x00-\x1F\x7F]/', '',str_replace(array('"'), '', $row['nombre_completo']) ),
+                            'pedido'        => preg_replace('/[\x00-\x1F\x7F]/', '', str_replace(array('"'), '', $row['campaign_name'])), 
+                            'hora_contacto'  =>preg_replace('/[\x00-\x1F\x7F]/', '',  $row['horario_de_contacto']),
+                            'platform'  =>preg_replace('/[\x00-\x1F\x7F]/', '',  $row['platform']),
+                            'email'    => preg_replace('/[\x00-\x1F\x7F]/', '', $row['correo_electronico']), 
+                            'telefono'     =>preg_replace('/[\x00-\x1F\x7F]/', '',  $row['numero_de_telefono']),
+                        ]);
+                    } catch (\Throwable $th) {
+                        
+                    }
+                    
                 }
             }else{
 
