@@ -23,6 +23,7 @@ class ImportDatos implements ToModel,WithHeadingRow
        
             $dato = Dato::where('email',preg_replace('/[\x00-\x1F\x7F]/', '', $row['correo_electronico'] ??$row['email'] ??1 ))
                             ->orWhere('telefono',preg_replace('/[\x00-\x1F\x7F]/', '', $row['numero_de_telefono'] ??$row['phone_number'] ?? 1))
+                            ->orWhere('name',preg_replace('/[\x00-\x1F\x7F]/', '', $row['nombre_completo'] ??$row['full_name'] ?? 1))
                             ->first();
 
             
