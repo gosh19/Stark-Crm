@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Datos\Admin;
 use Illuminate\Support\Arr;
 
+
 use Livewire\Component;
 
 class DatosList extends Component
@@ -22,6 +23,7 @@ class DatosList extends Component
 
     public $selected = null;
     public $openSelected = false;
+    public $openMail = false;
 
     public $selectedName ='';
 
@@ -49,6 +51,25 @@ class DatosList extends Component
         $datos = \App\Dato::where('case',$this->case)
                             ->whereBetween('updated_at',[$this->fechaDesde,$this->fechaHasta])
                             ->get();
+
+        foreach ($datos as $key => $value) {
+            if (count($this->campaigns) == 0) {
+                $this->campaigns[] = $value->pedido;
+            } else {
+                $exist = false;
+                foreach ($this->campaigns as $key => $name) {
+                    if ($name == $value->pedido) {
+                        $exist = true;
+                        break;
+                    }
+                }
+                if (!$exist) {
+                    $this->campaigns[]= $value->pedido;
+                }
+
+            }
+            
+        }
 
         $this->datos = $datos;
     }
@@ -146,6 +167,43 @@ class DatosList extends Component
             unset($this->selec[$i]);
         }
     }
+
+    public function toggleMail($value)
+    {
+        $this->openMail = $value;
+    }
+
+    /**
+     * recibe el nombre de pedido y añade los filtrados al array $datosMail
+     * en caso de ya haberlos agregado los elimina
+     */
+    public function addData($name)
+    {
+        $exist = false;
+        foreach ($this->datosMail as $i => $dataMail) {
+            if ($dataMail['pedido'] == $name) {
+                $exist = true;
+                break;
+            }
+        }
+
+        if ($exist) {
+            foreach ($this->datosMail as $i => $dataMail) {
+                if ($dataMail['pedido'] == $name) {
+                    unset($this->datosMail[$i]);
+                }
+            }
+        }else{
+
+            foreach ($this->datos as $dato) {
+                if ($dato->pedido == $name) {
+                    $this->datosMail [] = ['pedido'=>$name,'email'=>$dato->email];
+                }
+            }
+
+        }
+    }
+
 
     public function render()
     {

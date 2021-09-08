@@ -71,7 +71,10 @@
                                     
                                     <a href="{{route('Dato.usados')}}">Ir a datos usados</a>
                                 </div>
-                                
+                                <div class="col">
+                                    
+                                    <a href="{{route('Dato.mailView')}}">Panel de mail</a>
+                                </div>
                             </div>
                         </li>
                     </ul>

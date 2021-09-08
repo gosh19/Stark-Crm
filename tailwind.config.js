@@ -12,6 +12,8 @@ module.exports = {
     purge: {
         content: [
             './app/**/*.php',
+            './resources/**/**/*.php',
+            './resources/**/**/**/*.php',
             './resources/**/*.html',
             './resources/**/*.js',
             './resources/**/*.jsx',

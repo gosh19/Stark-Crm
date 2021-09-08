@@ -18,7 +18,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::post('/user/store', 'UserController@store')->name('User.store');
     Route::get('/Datos/Admin', 'DatoController@index')->name('Dato.index');
     Route::get('/Datos/Usados/{col?}/{order?}', 'DatoController@verUsados')->name('Dato.usados');
-
+    Route::get('/Datos/MailMarketing', 'DatoController@mailView')->name('Dato.mailView');
     Route::post('/Dato/{Dato}', 'DatoController@changeOp')->name('Dato.changeOP');
     Route::post('new-dato', 'DatoController@store')->name('Dato.newDato');
 

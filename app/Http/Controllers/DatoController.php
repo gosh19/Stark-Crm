@@ -107,4 +107,10 @@ class DatoController extends Controller
 
         return redirect()->back()->with('msg','Se cargaron con exito '.($cant+1).' dato(s) con exito');
     }
+
+    public function mailView()
+    {
+        return view('admin.mail-view');
+    }
+
 }
