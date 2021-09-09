@@ -58,46 +58,7 @@
     </div>
     {{--END MODAL VER DETALLE--}}
 
-    <div x-show="openMail" x-transition @click.away="openMail=false">
-        <div class="h-full w-full bg-gray-200">
-            <p class="text-2xl text-center">Se encontraron las siguientes campañas en la seleccion de datos</p>
-            <hr class="py-3">
-              @csrf
-              <div class="grid grid-cols-7 col-gap-2">
-                @foreach ($campaigns as $i => $name)
-                  <div class="col-span-1">
-                    <input type="checkbox" name="arrayCamp[{{$name}}]" wire:click="addData('{{$name}}')" >
-                    {{$name}}
-                  </div>            
-                @endforeach
-              </div>
-              <hr>
-              {{--CAJA DE EDITOR DE TEXTO--}}
-              <p class="text-2xl">Se seleccionaron {{count($datosMail)}}</p>
-              {{--
-              <div>
-                <textarea name="content" id="editor" wire:model="textMail">
-                </textarea>
-                <hr class="py2">
-                <div class="py-2 flex justify-center">
-            
-            
-                    <button class="bg-green-400 px-4 py-2" wire:loading.remove wire:click="sendMail()">Enviar</button>
-                    <div  >{{count($datosMail)}}  {{$textLoading}}</div>
-                </div>
-                    
-                <script>
-                  ClassicEditor
-                  .create( document.querySelector( '#editor' ) )
-                  .catch( error => {
-                    console.error( error );
-                  } );
-                  </script>
-              </div>
-              --}}
-          </div>
-        </div>
-    {{--END MODAL MAIL--}}
+   
 
   </div>
   

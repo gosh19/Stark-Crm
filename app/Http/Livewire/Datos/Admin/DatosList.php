@@ -52,25 +52,6 @@ class DatosList extends Component
                             ->whereBetween('updated_at',[$this->fechaDesde,$this->fechaHasta])
                             ->get();
 
-        foreach ($datos as $key => $value) {
-            if (count($this->campaigns) == 0) {
-                $this->campaigns[] = $value->pedido;
-            } else {
-                $exist = false;
-                foreach ($this->campaigns as $key => $name) {
-                    if ($name == $value->pedido) {
-                        $exist = true;
-                        break;
-                    }
-                }
-                if (!$exist) {
-                    $this->campaigns[]= $value->pedido;
-                }
-
-            }
-            
-        }
-
         $this->datos = $datos;
     }
 
