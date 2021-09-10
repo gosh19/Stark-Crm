@@ -2,7 +2,11 @@
 
     <div class="grid grid-cols-3">
         <div class="col-span-1 p-3">
-            <p class="text-2xl font-bold text-blue-400">Titulo</p>
+          <p class="text-2xl font-bold text-blue-800">Asunto</p>
+            <hr>
+            <input type="text" class="py-2 my-3 w-full" wire:model="subject" >
+            <hr>
+            <p class="text-2xl font-bold text-blue-600">Titulo</p>
             <hr>
             <input type="text" class="py-2 my-3 w-full" wire:model="title" >
             <hr>
@@ -60,9 +64,9 @@
                 </div>
               </div>
               <div class="col-span-1">
-                <p>Se enviaran {{count($datosMail)}} mail(s) </p>
-                <button wire:click="sendMail">Enviar</button>
-                <div wire:loading class="p-5"> Enviando</div>
+                <p class="text-lg mb-3">Se enviaran <b>{{count($datosMail)}}</b> mail(s) </p>
+                <button class="px-2 py-2 bg-blue-900 text-white w-1/2 rounded-md my-2" wire:click="sendMail">Enviar</button>
+                <div wire:loading class="animate-spin"> <i class="fas fa-spinner fa-2x"></i></div>
                 @foreach ($campaigns as $j => $item)
                     <div class="flex justify-between">
                       <label for="">{{$item}}</label>
@@ -141,8 +145,8 @@
                   <![endif]-->
                   <table role="presentation" style="width:94%;max-width:600px;border:none;border-spacing:0;text-align:center;font-family:Arial,sans-serif;font-size:16px;line-height:22px;color:#363636;">
                     <tr>
-                      <td style="text-align:center;font-size:24px;font-weight:bold;padding:20px">
-                        <a href="https://www.worknow-cursos.com/intro" style="text-decoration:none;margin-bottom:100px;"><img src="https://www.worknow-cursos.com/img/logo-wn.png" width="165" alt="Logo" style="width:80%;max-width:165px;height:auto;border:none;text-decoration:none;color:#ffffff;margin-left:35%;"></a>
+                      <td style="padding:40px 30px 30px 30px;text-align:center;font-size:24px;font-weight:bold;">
+                        <a href="https://www.worknow-cursos.com/intro" style="text-decoration:none;margin-bottom:100px;"><img src="https://www.worknow-cursos.com/img/logo-wn.png" width="165" alt="Logo" style="width:80%;max-width:165px;height:auto;border:none;text-decoration:none;color:#ffffff;"></a>
                       </td>
                     </tr>
                     <tr>

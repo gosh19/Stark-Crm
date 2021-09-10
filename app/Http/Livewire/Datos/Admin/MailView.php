@@ -14,6 +14,7 @@ class MailView extends Component
     public $text;
     public $textMod ="";
     public $title;
+    public $subject;
     public $courses = [];
     public $selectedCourses = [];
     public $selected = [];
@@ -119,7 +120,7 @@ class MailView extends Component
     {
         foreach ($this->datosMail as $key => $value) {
             try {
-                Mail::to($value['email'])->send(new MailMarketing($this->textMod,$this->title,$this->selectedCourses));
+                Mail::to($value['email'])->send(new MailMarketing($this->subject,$this->textMod,$this->title,$this->selectedCourses));
             } catch (\Throwable $th) {
                 throw $th;
             }

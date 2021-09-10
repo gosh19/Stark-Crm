@@ -15,16 +15,19 @@ class MailMarketing extends Mailable
     public $selectedCourses = [];
     public $title ="";
 
+    public $subject;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($text,$title, $selectedCourses)
+    public function __construct($subject, $text, $title, $selectedCourses)
     {
         $this->text = $text;
         $this->title = $title;
         $this->selectedCourses = $selectedCourses;
+        $this->subject = $subject;
     }
 
     /**
