@@ -62,7 +62,7 @@
                   <table role="presentation" style="width:94%;max-width:600px;border:none;border-spacing:0;text-align:center;font-family:Arial,sans-serif;font-size:16px;line-height:22px;color:#363636;">
                     <tr>
                       <td style="text-align:center;font-size:24px;font-weight:bold;padding:20px">
-                        <a href="https://www.worknow-cursos.com/intro" style="text-decoration:none;margin-bottom:100px;"><img src="https://www.worknow-cursos.com/img/logo-wn.png" width="165" alt="Logo" style="width:80%;max-width:165px;height:auto;border:none;text-decoration:none;color:#ffffff;margin-left:35%;"></a>
+                        <a href="https://www.worknow-cursos.com/intro" style="text-decoration:none;margin-bottom:100px;"><img src="https://www.worknow-cursos.com/img/logo-wn.png" width="165" alt="Logo" style="width:80%;max-width:165px;height:auto;border:none;text-decoration:none;color:#ffffff;"></a>
                       </td>
                     </tr>
                     <tr>
