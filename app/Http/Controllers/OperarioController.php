@@ -74,4 +74,11 @@ class OperarioController extends Controller
 
         return view('operario.posibles',['datos' => $datos]);
     }
+
+    public function deleteOp(\App\Operario $operario)
+    {
+        $operario->delete();
+
+        return redirect()->back();
+    }
 }

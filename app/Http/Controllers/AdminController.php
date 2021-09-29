@@ -6,11 +6,13 @@ use Illuminate\Http\Request;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 use Carbon\Carbon;
 
+use \App\Operario;
+
 class AdminController extends Controller
 {
     public function index()
     {
-        $operarios = \App\Operario::getAll();
+        $operarios = Operario::getAll();
 
         $hoy = Carbon::now();
 
@@ -130,4 +132,10 @@ class AdminController extends Controller
                                     ]);
     }
 
+    public function gestionUsers()
+    {
+        $operarios = Operario::getAll();
+
+        return view('admin.gestion-users',['operarios'=>$operarios]);
+    }
 }

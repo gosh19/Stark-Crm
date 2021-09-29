@@ -60,11 +60,16 @@
                     </div>
                     <ul class="list-group">
                         <li class="list-group-item"><a data-toggle="collapse" href="#form-carga-csv">Subir CSV</a></li>
-                        <li class="list-group-item"><a data-toggle="collapse" href="#form-create-user">Crear usuario</a></li>
+                        <li class="list-group-item">
+                            <div class="grid grid-cols-3">
+
+                                <a data-toggle="collapse" href="#form-create-user">Crear usuario</a>
+                                <a href="{{ route('Admin.gestionUsers') }}">Gestion de usuarios</a>
+                            </div>
+                        </li>
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col">
-
                                     <a href="{{route('Dato.index')}}">Ir a datos nuevos</a>
                                 </div>
                                 <div class="col">

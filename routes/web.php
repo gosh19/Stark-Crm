@@ -10,7 +10,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::view('/asd', 'mail.na');
 Route::group(['middleware' => ['admin']], function () {
     
     Route::post('import', 'DatoController@import');
@@ -23,6 +22,9 @@ Route::group(['middleware' => ['admin']], function () {
     Route::post('new-dato', 'DatoController@store')->name('Dato.newDato');
 
     Route::post('/pasar-usado', 'DatoController@pasarUsado')->name('Dato.pasarUsado');
+
+    Route::get('/Admin/GestionUsers', 'AdminController@gestionUsers')->name('Admin.gestionUsers');
+    Route::get('/Operario/delete/{operario}', 'OperarioController@deleteOp')->name('Operario.deleteOp');
     
 });
 
