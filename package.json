@@ -25,7 +25,7 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
-        "@ckeditor/ckeditor5-ckfinder": "^29.1.0",
+        "@ckeditor/ckeditor5-ckfinder": "^36.0.1",
         "@tailwindcss/ui": "^0.7.2",
         "tailwind": "^4.0.0"
     }
